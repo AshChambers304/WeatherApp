@@ -8,12 +8,12 @@ import { ThemeService } from 'src/app/shared/services/theme.service';
 export class HomeComponent implements OnInit {
   constructor(private themeService: ThemeService) {}
 
-  public currentTime: Date = new Date();
+  public currentTime: string = '';
 
   getCurrentDate(): void {
     setInterval(() => {
-      this.currentTime = new Date();
-    }, 60000);
+      this.currentTime = new Date().toUTCString().slice(0, 22).toString();
+    }, 500);
   }
 
   ngOnInit(): void {
