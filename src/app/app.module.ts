@@ -6,6 +6,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { SearchComponent } from './pages/search/search.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { NavigationComponent } from './shared/components/navigation/navigation.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,7 @@ import { NavigationComponent } from './shared/components/navigation/navigation.c
     NavigationComponent,
     PageNotFoundComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule],
+  imports: [BrowserModule, AppRoutingModule, FontAwesomeModule],
   providers: [],
   bootstrap: [AppComponent],
 })

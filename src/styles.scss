@@ -1,26 +1,11 @@
+@use "/src/assets/scss/variables";
+
 *,
 *::before,
 *::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
-
-.light-theme {
-  --text-color: #222;
-  --bg-color: #f5f5f5;
-  --btn-txt-color: #fff;
-  --btn-bg-color: rgb(187, 73, 73);
-  --box-color: #fff;
-  --box-shadow: 0 15px 25px rgba(0, 0, 0, 0.1);
-}
-
-.dark-theme {
-  --text-color: #fff;
-  --bg-color: #222;
-  --btn-txt-color: #fff;
-  --btn-bg-color: rgb(187, 73, 73);
-  --box-color: #1a1a1a;
 }
 
 body {
@@ -43,7 +28,7 @@ body {
   padding: 1rem;
   border-radius: 9px;
   opacity: 0.75;
-  background-color: var(--btn-bg-color);
+  background-color: var(--brand-color);
   color: var(--btn-txt-color);
   font-weight: 600;
   cursor: pointer;

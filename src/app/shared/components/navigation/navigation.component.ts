@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { faHome, faSearch } from '@fortawesome/free-solid-svg-icons';
+import { ThemeService } from 'src/app/shared/services/theme.service';
 
 @Component({
   selector: 'app-navigation',
@@ -6,7 +8,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./navigation.component.scss'],
 })
 export class NavigationComponent implements OnInit {
-  constructor() {}
+  faHome = faHome;
+  faSearch = faSearch;
+
+  constructor(private themeService: ThemeService) {}
 
   ngOnInit(): void {}
 }

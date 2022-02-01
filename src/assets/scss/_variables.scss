@@ -1,0 +1,35 @@
+.light-theme {
+  --text-color: #222;
+  --bg-color: #f5f5f5;
+  --btn-txt-color: #fff;
+  --brand-color: rgb(73, 122, 187);
+  --box-color: #fff;
+  --box-shadow: 0 15px 25px rgba(0, 0, 0, 0.1);
+
+  .nav-item {
+    transition: all 0.2s ease;
+    opacity: 0.75;
+
+    &:hover,
+    &:active {
+      opacity: 1;
+    }
+  }
+}
+
+.dark-theme {
+  --text-color: #fff;
+  --bg-color: #222;
+  --btn-txt-color: #fff;
+  --brand-color: rgb(73, 122, 187);
+  --box-color: #1a1a1a;
+
+  .nav-item {
+    transition: all 0.2s ease;
+
+    &:hover,
+    &:active {
+      color: var(--brand-color);
+    }
+  }
+}
