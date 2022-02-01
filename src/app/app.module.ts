@@ -7,6 +7,7 @@ import { SearchComponent } from './pages/search/search.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { NavigationComponent } from './shared/components/navigation/navigation.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { HeaderComponent } from './shared/components/header/header.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     SearchComponent,
     NavigationComponent,
     PageNotFoundComponent,
+    HeaderComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FontAwesomeModule],
   providers: [],

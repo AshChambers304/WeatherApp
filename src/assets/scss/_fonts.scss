@@ -1,0 +1,24 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&family=Poppins:wght@300;400;600&display=swap");
+
+$base-font-sizes: (
+  null: 12px,
+  320px: 12px,
+  480px: 14px,
+  640px: 16,
+  980px: 18,
+  1200px: 21,
+);
+
+:root {
+  //Font-Families
+
+  --ff-default: "Poppins", sans-serif;
+  --ff-alt: "Open Sans", sans-serif;
+
+  //Font-Sizes
+
+  --fs-xsmall: 0.75rem;
+  --fs-small: 0.85rem;
+  --fs-large: 2rem;
+  --fs-xlarge: 2.5rem;
+}

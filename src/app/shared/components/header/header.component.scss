@@ -1,0 +1,19 @@
+header {
+  width: 100vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.date-location {
+  font-family: var(--ff-alt);
+  font-size: var(--fs-xsmall);
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+.theme-switcher {
+  display: flex;
+  padding: 1rem;
+}

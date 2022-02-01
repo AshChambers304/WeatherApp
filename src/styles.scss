@@ -1,4 +1,6 @@
-@use "/src/assets/scss/variables";
+@use "/src/assets/scss/fonts";
+@use "/src/assets/scss/mixins";
+@use "/src/assets/scss/themes";
 
 *,
 *::before,
@@ -8,9 +10,14 @@
   box-sizing: border-box;
 }
 
+html {
+  @include mixins.font-size(fonts.$base-font-sizes);
+}
+
 body {
   background-color: var(--bg-color);
   color: var(--text-color);
+  font-family: var(--ff-default);
   transition: all 0.35s ease;
 }
 

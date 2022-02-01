@@ -2,29 +2,16 @@
   width: 100vw;
 }
 
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.date-location {
-  display: flex;
-  flex-direction: column;
-  padding: 1rem;
-}
-
-.theme-switcher {
-  display: flex;
-  padding: 1rem;
-}
-
 .current-weather {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 1rem;
+
+  .weather-type {
+    font-size: var(--fs-xlarge);
+  }
 }
 
 .current-weather > * {
@@ -32,9 +19,11 @@ header {
 }
 
 .weather-details > * {
+  font-size: var(--fs-small);
   margin: 1rem 2rem;
 }
 
 .further-details > * {
+  font-size: var(--fs-small);
   margin: 1rem 2rem;
 }
