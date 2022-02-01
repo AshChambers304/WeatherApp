@@ -14,7 +14,7 @@ export class ThemeService {
   ) {
     this.renderer = rendererFactory.createRenderer(null, null);
 
-    this.theme = localStorage.getItem('themeToken') || 'light-theme';
+    this.theme = localStorage.getItem('themeToken') || '';
 
     this.initializeTheme();
   }

@@ -5,8 +5,8 @@ import { SearchComponent } from './pages/search/search.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 
 const routes: Routes = [
-  { path: '/home', component: HomeComponent },
-  { path: '/search', component: SearchComponent },
+  { path: 'home', component: HomeComponent },
+  { path: 'search', component: SearchComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent },
 ];
