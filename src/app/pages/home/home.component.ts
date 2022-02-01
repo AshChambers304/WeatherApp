@@ -13,7 +13,7 @@ export class HomeComponent implements OnInit {
   getCurrentDate(): void {
     setInterval(() => {
       this.currentTime = new Date();
-    }, 1000);
+    }, 60000);
   }
 
   ngOnInit(): void {
