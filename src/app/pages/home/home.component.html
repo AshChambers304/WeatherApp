@@ -1,0 +1,31 @@
+<div class="container">
+  <header>
+    <div class="date-location box">
+      <span class="date">{{
+        this.currentTime.toLocaleString().slice(0, 17)
+      }}</span>
+      <span class="location"
+        ><span class="city">Wolverhampton, </span
+        ><span class="country">England</span></span
+      >
+    </div>
+    <div class="theme-switcher">
+      <span class="btn" (click)="switchTheme()">Switch Theme</span>
+    </div>
+  </header>
+
+  <div class="current-weather">
+    <span class="weather-type">Sunny</span>
+    <img src="" alt="weather icon" class="weather-icon" />
+    <div class="weather-details box">
+      <span class="current-humidity">36-38%</span>
+      <span class="current-temp"> 27 </span>
+      <span class="current-wind">24km/h</span>
+    </div>
+    <div class="further-details box">
+      <span class="current-uv">High</span>
+      <span class="current-pollution">Moderate</span>
+      <span class="current-Pollen">Low</span>
+    </div>
+  </div>
+</div>

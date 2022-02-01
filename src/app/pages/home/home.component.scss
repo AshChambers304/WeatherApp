@@ -1,0 +1,45 @@
+.container {
+  width: 100vw;
+  height: 100vh;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.date-location {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+.theme-switcher {
+  display: flex;
+  padding: 1rem;
+}
+
+.theme-switcher > * {
+  margin: 10px;
+}
+
+.current-weather {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 3rem;
+}
+
+.current-weather > * {
+  margin: 1rem;
+}
+
+.weather-details > * {
+  margin: 3rem;
+}
+
+.further-details > * {
+  margin: 3rem;
+}
