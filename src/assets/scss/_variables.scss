@@ -10,10 +10,13 @@
     transition: all 0.2s ease;
     opacity: 0.75;
 
-    &:hover,
-    &:active {
+    &:hover {
       opacity: 1;
     }
+  }
+  .active {
+    transition: all 0.2s ease;
+    opacity: 1;
   }
 }
 
@@ -27,9 +30,12 @@
   .nav-item {
     transition: all 0.2s ease;
 
-    &:hover,
-    &:active {
+    &:hover {
       color: var(--brand-color);
     }
+  }
+  .active {
+    transition: all 0.2s ease;
+    color: var(--brand-color);
   }
 }

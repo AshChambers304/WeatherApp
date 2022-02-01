@@ -1,6 +1,17 @@
 <div class="nav-container">
-  <fa-icon class="nav-item" [icon]="faHome" [routerLink]="'home'"></fa-icon>
-  <fa-icon class="nav-item" [icon]="faSearch" [routerLink]="'search'"></fa-icon>
-  <fa-icon class="nav-item" [icon]="faHome"></fa-icon>
-  <fa-icon class="nav-item" [icon]="faHome"></fa-icon>
+  <fa-icon
+    class="nav-item"
+    [icon]="faHome"
+    [routerLink]="'home'"
+    routerLinkActive="active"
+    [routerLinkActiveOptions]="{ exact: true }"
+  ></fa-icon>
+  <fa-icon
+    class="nav-item"
+    [icon]="faSearch"
+    [routerLink]="'search'"
+    routerLinkActive="active"
+  ></fa-icon>
+  <fa-icon class="nav-item" [icon]="faHome" routerLinkActive="active"></fa-icon>
+  <fa-icon class="nav-item" [icon]="faHome" routerLinkActive="active"></fa-icon>
 </div>
