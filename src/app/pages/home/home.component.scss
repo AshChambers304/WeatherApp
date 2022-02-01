@@ -19,16 +19,12 @@ header {
   padding: 1rem;
 }
 
-.theme-switcher > * {
-  margin: 10px;
-}
-
 .current-weather {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 3rem;
+  padding: 1rem;
 }
 
 .current-weather > * {
@@ -36,9 +32,9 @@ header {
 }
 
 .weather-details > * {
-  margin: 3rem;
+  margin: 1rem 2rem;
 }
 
 .further-details > * {
-  margin: 3rem;
+  margin: 1rem 2rem;
 }
