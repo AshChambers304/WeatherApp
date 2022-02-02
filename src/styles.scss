@@ -1,5 +1,5 @@
-@use "/src/assets/scss/fonts";
-@use "/src/assets/scss/mixins";
+@use "/src/assets/scss/fonts" as f;
+@use "/src/assets/scss/mixins" as m;
 @use "/src/assets/scss/themes";
 
 *,
@@ -11,7 +11,7 @@
 }
 
 html {
-  @include mixins.font-size(fonts.$base-font-sizes);
+  @include m.font-size(f.$base-font-sizes);
 }
 
 body {
