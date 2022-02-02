@@ -1,5 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&family=Poppins:wght@300;400;600&display=swap");
 
+//Map off base font-sizes based on screen size
+
 $base-font-sizes: (
   null: 12px,
   320px: 12px,
@@ -21,4 +23,9 @@ $base-font-sizes: (
   --fs-small: 0.85rem;
   --fs-large: 2rem;
   --fs-xlarge: 2.5rem;
+
+  //Font-Weights
+
+  --fw-light: 300;
+  --fw-bold: 600;
 }

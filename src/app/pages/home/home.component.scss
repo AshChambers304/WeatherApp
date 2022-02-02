@@ -12,6 +12,11 @@
   .weather-type {
     font-size: var(--fs-xlarge);
   }
+
+  .weather-icon {
+    max-width: 200px;
+    height: auto;
+  }
 }
 
 .current-weather > * {
