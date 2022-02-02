@@ -1,0 +1,37 @@
+@use "../../../../src/assets/scss/fonts" as f;
+@use "../../../../src/assets/scss/themes" as t;
+
+.search-container {
+  margin: 1rem;
+
+  h1 {
+    text-align: center;
+  }
+
+  .search-results-container {
+    margin: 2rem 1rem;
+
+    .search-result {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 2rem 0;
+      .current-weather {
+        display: flex;
+        align-items: center;
+
+        img {
+          max-width: 1rem;
+          height: auto;
+        }
+
+        .country {
+          font-weight: var(--fw-light);
+        }
+      }
+      .current-weather > * {
+        margin: 0 1rem;
+      }
+    }
+  }
+}
