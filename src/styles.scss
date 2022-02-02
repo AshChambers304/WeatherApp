@@ -21,6 +21,11 @@ body {
   transition: all 0.35s ease;
 }
 
+form,
+input {
+  color: var(--text-color);
+}
+
 .box {
   margin: 1rem;
   padding: 1rem;

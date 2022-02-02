@@ -35,3 +35,25 @@
     }
   }
 }
+
+#search-form {
+  display: flex;
+  max-width: 300px;
+  margin: 1rem auto;
+  padding: 1rem;
+  background: transparent;
+  border: 1px solid var(--text-color);
+  border-radius: 9px;
+
+  input,
+  input:focus {
+    outline: none;
+    background-color: transparent;
+    border: none;
+    flex-grow: 2;
+  }
+}
+
+#search-form > * {
+  margin: 0 0.5rem;
+}
