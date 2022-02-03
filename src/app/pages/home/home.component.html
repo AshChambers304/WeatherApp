@@ -1,21 +1,32 @@
 <div class="container">
   <div class="current-weather">
-    <h1 class="weather-type">Sunny</h1>
+    <h1 class="weather-type">
+      {{ this.currentWeather.weather[0].main }}
+    </h1>
     <img
-      src="../../../assets/weather-icons/weather-icon-sun.png"
+      src="http://openweathermap.org/img/wn/{{
+        this.currentWeather.weather[0].icon
+      }}@4x.png"
       alt="weather icon"
       class="weather-icon"
     />
-    <span class="current-location">Wolverhampton, England</span>
+    <span class="current-location"
+      >{{ this.currentWeather.name }},
+      {{ this.currentWeather.sys.country }}</span
+    >
     <div class="weather-details box">
-      <span class="current-humidity">36-38%</span>
-      <span class="current-temp"> 27 </span>
-      <span class="current-wind">24km/h</span>
+      <span class="current-humidity"
+        >{{ this.currentWeather.main.humidity }}%</span
+      >
+      <span class="current-temp"> {{ this.currentWeather.main.temp }} </span>
+      <span class="current-wind">{{ this.currentWeather.wind.speed }}</span>
     </div>
-    <div class="further-details box">
+    <!--<div class="further-details box">
       <span class="current-uv">High</span>
       <span class="current-pollution">Moderate</span>
       <span class="current-Pollen">Low</span>
     </div>
+  </div>
+</div>-->
   </div>
 </div>
