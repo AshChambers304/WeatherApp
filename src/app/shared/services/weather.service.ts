@@ -11,7 +11,7 @@ export class WeatherService {
   public pollTimer: PollTimer = { pollCount: 0, interval: null };
 
   private _url: string =
-    'https://api.openweathermap.org/data/2.5/weather?lat=51.509865&lon=-0.118092&appid=3980f86beb307e02c02a934d721a19a7';
+    'https://api.openweathermap.org/data/2.5/weather?lat=52.59919937440615&lon=-2.1053946227430544&appid=3980f86beb307e02c02a934d721a19a7';
 
   constructor(private http: HttpClient) {}
 
