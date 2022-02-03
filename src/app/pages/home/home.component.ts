@@ -46,7 +46,7 @@ export class HomeComponent implements OnInit {
       .getWeather()
       .subscribe((data) => (this.currentWeather = data));
 
-    this.weatherService.pollTimer.interval = setInterval(() => {
+    /*this.weatherService.pollTimer.interval = setInterval(() => {
       this.weatherService
         .getWeather()
         .subscribe((data) => (this.currentWeather = data));
@@ -54,7 +54,7 @@ export class HomeComponent implements OnInit {
       this.weatherService.pollTimer.pollCount++;
 
       console.log('No. of updates: ' + this.weatherService.pollTimer.pollCount);
-    }, 60000);
+    }, 60000);*/
   }
 
   ngOnDestroy(): void {
