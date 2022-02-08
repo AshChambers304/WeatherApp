@@ -1,11 +1,10 @@
 header {
-  width: 100vw;
+  width: calc(100vw - var(--nav-width));
   max-height: var(--header-height);
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 1rem;
-  box-shadow: var(--box-shadow-light);
   position: sticky;
   top: 0;
   left: 0;

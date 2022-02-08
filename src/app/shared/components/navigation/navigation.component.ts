@@ -5,7 +5,7 @@ import {
   faSearch,
   faMoon,
   faSun,
-  IconDefinition,
+  faBolt,
 } from '@fortawesome/free-solid-svg-icons';
 import { NavigationService } from '../../services/navigation.service';
 import { ThemeService } from '../../services/theme.service';
@@ -20,6 +20,7 @@ export class NavigationComponent implements OnInit {
   faSearch = faSearch;
   faMoon = faMoon;
   faSun = faSun;
+  faBolt = faBolt;
 
   constructor(
     public navService: NavigationService,
