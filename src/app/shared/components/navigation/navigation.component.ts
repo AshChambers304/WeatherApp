@@ -1,12 +1,5 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
-import { IconProp } from '@fortawesome/fontawesome-svg-core';
-import {
-  faHome,
-  faSearch,
-  faMoon,
-  faSun,
-  faBolt,
-} from '@fortawesome/free-solid-svg-icons';
+import { faHome, faSearch, faBolt } from '@fortawesome/free-solid-svg-icons';
 import { NavigationService } from '../../services/navigation.service';
 import { ThemeService } from '../../services/theme.service';
 
@@ -18,9 +11,10 @@ import { ThemeService } from '../../services/theme.service';
 export class NavigationComponent implements OnInit {
   faHome = faHome;
   faSearch = faSearch;
-  faMoon = faMoon;
-  faSun = faSun;
   faBolt = faBolt;
+
+  public themeName = this.themeService.currentThemeName;
+  public themeIcon = this.themeService.currentThemeIcon;
 
   constructor(
     public navService: NavigationService,
@@ -29,6 +23,9 @@ export class NavigationComponent implements OnInit {
 
   switchTheme(): void {
     this.themeService.switchTheme();
+
+    this.themeName = this.themeService.currentThemeName;
+    this.themeIcon = this.themeService.currentThemeIcon;
   }
 
   ngOnInit(): void {}

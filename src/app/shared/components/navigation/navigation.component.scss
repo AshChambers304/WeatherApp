@@ -2,7 +2,7 @@
   position: sticky;
   left: 0;
   top: var(--header-height);
-  width: var(--nav-width);
+  width: var(--nav-width-mobile);
   height: 100vh;
   background-color: var(--bg-color);
   display: flex;
@@ -22,16 +22,14 @@
 
   section.logo {
     display: flex;
+    align-items: center;
     width: 100%;
     transition: all 0.2 ease-in-out;
-
-    .app-name {
-      display: none;
-    }
+    margin: 1rem;
   }
 
-  section.logo > * {
-    margin: 1rem;
+  section.logo fa-icon {
+    margin-right: 1rem;
   }
 
   section.nav-top {
@@ -45,7 +43,7 @@
 }
 
 .open {
-  width: var(--nav-width-open);
+  width: var(--nav-width-mobile-open);
 }
 
 .nav-item {
@@ -67,16 +65,26 @@
   transition: all 0.2s ease-in-out;
 }
 
-.open {
-  justify-content: flex-start;
+.app-name {
+  font-size: var(--fs-xlarge);
+  transform: scale(0);
+  transition: all 0.2s ease-in-out;
 }
 
 .open .nav-name {
   transform: scale(1);
 }
 
-.open section.logo {
-  .app-name {
-    display: block;
+.open .app-name {
+  transform: scale(1);
+}
+
+@media screen and (min-width: 650px) {
+  .nav-container {
+    width: var(--nav-width);
+  }
+
+  .open {
+    width: var(--nav-width-open);
   }
 }

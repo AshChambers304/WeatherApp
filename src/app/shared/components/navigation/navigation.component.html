@@ -45,8 +45,12 @@
 
     <section class="nav-utility">
       <div class="nav-item" (click)="this.switchTheme()">
-        <fa-icon class="nav-icon" id="theme-icon" [icon]="faMoon"></fa-icon
-        ><span class="nav-name" id="theme-name">Dark Theme</span>
+        <fa-icon
+          class="nav-icon"
+          id="theme-icon"
+          [icon]="this.themeIcon"
+        ></fa-icon
+        ><span class="nav-name" id="theme-name">{{ this.themeName }}</span>
       </div>
     </section>
   </div>
