@@ -1,3 +1,4 @@
+@use "/src/assets/scss/variables" as v;
 @use "/src/assets/scss/fonts" as f;
 @use "/src/assets/scss/mixins" as m;
 @use "/src/assets/scss/themes";
@@ -8,6 +9,10 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+:root {
+  overflow: hidden;
 }
 
 html {
@@ -36,7 +41,6 @@ input {
 }
 
 .btn {
-  margin: 1rem;
   padding: 1rem;
   border-radius: 9px;
   opacity: 0.75;

@@ -1,11 +1,62 @@
 .nav-container {
-  position: fixed;
-  bottom: 0;
-  width: 100vw;
-  padding: 1rem;
-  background-color: transparent;
+  position: sticky;
+  left: 0;
+  top: var(--header-height);
+  width: var(--nav-width);
+  height: calc(100vh - var(--header-height));
+  background-color: var(--bg-color);
   display: flex;
-  justify-content: space-evenly;
+  flex-direction: column;
+  justify-content: space-between;
+
+  font-size: var(--fs-large);
+  border-right: 1px solid var(--text-color);
+  overflow: hidden;
+  white-space: nowrap;
+  transition: all 0.2s ease-in-out;
+
+  section.nav-top {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  section.nav-utility {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .nav-icon {
+    margin: 1rem 0;
+  }
+}
+
+.open {
+  width: 300px;
+}
+
+.nav-item {
+  display: flex;
   align-items: center;
-  font-size: var(--fs-xlarge);
+  justify-content: flex-start;
+  padding: 0 1rem;
+  width: 100%;
+  cursor: pointer;
+}
+
+.nav-item > * {
+  margin: 0 1rem;
+}
+
+.nav-name {
+  font-size: var(--fs-default);
+  transform: scale(0);
+  transition: all 0.2s ease-in-out;
+}
+
+.open .nav-name {
+  transform: scale(1);
 }

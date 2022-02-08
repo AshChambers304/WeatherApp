@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { ThemeService } from '../../services/theme.service';
+import { Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
+import { faBars } from '@fortawesome/free-solid-svg-icons';
+import { NavigationService } from '../../services/navigation.service';
 
 @Component({
   selector: 'app-header',
@@ -7,7 +8,11 @@ import { ThemeService } from '../../services/theme.service';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  constructor(private themeService: ThemeService) {}
+  faBars = faBars;
+
+  public isOpen: boolean = false;
+
+  constructor(private navService: NavigationService) {}
 
   ngOnInit(): void {
     this.getCurrentDate();
@@ -21,7 +26,7 @@ export class HeaderComponent implements OnInit {
     }, 500);
   }
 
-  switchTheme() {
-    this.themeService.switchTheme();
+  toggleSideNav(): void {
+    this.navService.toggleNav();
   }
 }

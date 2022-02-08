@@ -1,12 +1,8 @@
 <header>
-  <div class="date-location box">
-    <span class="date" id="clock">{{ this.currentTime }}</span>
-    <span class="location"
-      ><span class="city">Wolverhampton, </span
-      ><span class="country">England</span></span
-    >
+  <div class="hamburger" (click)="toggleSideNav()">
+    <fa-icon [icon]="faBars"></fa-icon>
   </div>
-  <div class="theme-switcher">
-    <span class="btn" (click)="switchTheme()">Switch Theme</span>
+  <div class="date">
+    <span class="date" id="clock">{{ this.currentTime }}</span>
   </div>
 </header>

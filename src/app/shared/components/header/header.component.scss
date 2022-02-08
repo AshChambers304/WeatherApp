@@ -1,18 +1,18 @@
 header {
   width: 100vw;
+  max-height: var(--header-height);
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  box-shadow: var(--box-shadow-light);
+  position: sticky;
+  top: 0;
+  left: 0;
+  background-color: var(--bg-color);
+  overflow: hidden;
 }
 
-.date-location {
+.date {
   font-size: var(--fs-xsmall);
-  display: flex;
-  flex-direction: column;
-  padding: 1rem;
-}
-
-.theme-switcher {
-  display: flex;
-  padding: 1rem;
 }

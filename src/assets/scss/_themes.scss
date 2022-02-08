@@ -4,9 +4,25 @@
   --btn-txt-color: #fff;
   --brand-color: rgb(73, 122, 187);
   --box-color: #fff;
+  --hover-color: rgb(230, 230, 230);
   --box-shadow: 0 15px 25px rgba(0, 0, 0, 0.1);
 
-  .nav-icon {
+  .nav-item {
+    &:hover {
+      background-color: var(--hover-color);
+
+      .nav-icon {
+        opacity: 1;
+      }
+    }
+    .nav-icon {
+      transition: all 0.2s ease;
+      cursor: pointer;
+      opacity: 0.35;
+    }
+  }
+
+  .hamburger {
     transition: all 0.2s ease;
     cursor: pointer;
     opacity: 0.35;
@@ -17,7 +33,11 @@
   }
 
   .active {
-    opacity: 1;
+    background-color: var(--hover-color);
+    box-shadow: inset 0px 0px 0px var(--brand-color);
+    .nav-icon {
+      opacity: 1;
+    }
   }
 }
 
@@ -26,9 +46,24 @@
   --bg-color: #222;
   --btn-txt-color: #fff;
   --brand-color: rgb(73, 122, 187);
+  --hover-color: rgb(26, 26, 26);
   --box-color: #1a1a1a;
 
-  .nav-icon {
+  .nav-item {
+    &:hover {
+      background-color: var(--hover-color);
+
+      .nav-icon {
+        color: var(--brand-color);
+      }
+    }
+    .nav-icon {
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+  }
+
+  .hamburger {
     transition: all 0.2s ease;
     cursor: pointer;
 
@@ -38,6 +73,10 @@
   }
 
   .active {
-    color: var(--brand-color);
+    background-color: var(--hover-color);
+    box-shadow: inset 0px 0px 0px var(--brand-color);
+    .nav-icon {
+      color: var(--brand-color);
+    }
   }
 }

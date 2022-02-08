@@ -1,17 +1,47 @@
-<div class="nav-container">
-  <fa-icon
-    class="nav-icon"
-    [icon]="faHome"
-    [routerLink]="'home'"
-    routerLinkActive="active"
-    [routerLinkActiveOptions]="{ exact: true }"
-  ></fa-icon>
-  <fa-icon
-    class="nav-icon"
-    [icon]="faSearch"
-    [routerLink]="'search'"
-    routerLinkActive="active"
-  ></fa-icon>
-  <fa-icon class="nav-icon" [icon]="faHome" routerLinkActive="active"></fa-icon>
-  <fa-icon class="nav-icon" [icon]="faHome" routerLinkActive="active"></fa-icon>
+<div class="nav-container" [ngClass]="this.navService.isNavOpen ? 'open' : ''">
+  <section class="nav-top">
+    <div
+      class="nav-item"
+      [routerLink]="'home'"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      <fa-icon class="nav-icon" [icon]="faHome"></fa-icon
+      ><span class="nav-name">Home</span>
+    </div>
+    <div
+      class="nav-item"
+      [routerLink]="'search'"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      <fa-icon class="nav-icon" [icon]="faSearch"></fa-icon
+      ><span class="nav-name">Search Locations</span>
+    </div>
+    <div
+      class="nav-item"
+      [routerLink]="'/'"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      <fa-icon class="nav-icon" [icon]="faHome"></fa-icon
+      ><span class="nav-name">Home</span>
+    </div>
+    <div
+      class="nav-item"
+      [routerLink]="'/'"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      <fa-icon class="nav-icon" [icon]="faHome"></fa-icon
+      ><span class="nav-name">Home</span>
+    </div>
+  </section>
+
+  <section class="nav-utility">
+    <div class="nav-item" (click)="this.switchTheme()">
+      <fa-icon class="nav-icon" id="theme-icon" [icon]="faMoon"></fa-icon
+      ><span class="nav-name" id="theme-name">Dark Theme</span>
+    </div>
+  </section>
 </div>
