@@ -12,9 +12,8 @@
 }
 
 :root {
-}
-
-html {
+  height: 100%;
+  width: 100%;
   @include m.font-size(f.$base-font-sizes);
 }
 
