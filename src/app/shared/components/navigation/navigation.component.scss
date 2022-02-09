@@ -3,13 +3,12 @@
   left: 0;
   top: var(--header-height);
   width: var(--nav-width-mobile);
-  height: 100vh;
+  height: 100%;
   background-color: var(--bg-color);
   display: flex;
   flex-direction: column;
   font-size: var(--fs-large);
   border-right: 1px solid var(--text-color);
-  overflow: hidden;
   white-space: nowrap;
   transition: all 0.2s ease-in-out;
 

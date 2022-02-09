@@ -1,6 +1,6 @@
 header {
-  width: calc(100vw - var(--nav-width));
-  max-height: var(--header-height);
+  width: 100%;
+  height: var(--header-height);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -9,7 +9,6 @@ header {
   top: 0;
   left: 0;
   background-color: var(--bg-color);
-  overflow: hidden;
 }
 
 .date {
