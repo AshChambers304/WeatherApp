@@ -1,85 +1,59 @@
-.nav-container {
-  position: sticky;
-  left: 0;
-  top: var(--header-height);
-  width: var(--nav-width-mobile);
-  height: 100%;
-  background-color: var(--bg-color);
+.container {
   display: flex;
   flex-direction: column;
-  font-size: var(--fs-large);
-  border-right: 1px solid var(--text-color);
-  white-space: nowrap;
+  height: 100%;
+  width: var(--nav-width-mobile);
   transition: all 0.2s ease-in-out;
+  border-right: 1px solid var(--text-color);
+}
 
-  .nav-content {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
+.logo {
+  font-size: var(--fs-large);
+  font-weight: var(--fw-bold);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  padding: 1rem;
+}
 
-  section.logo {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    transition: all 0.2 ease-in-out;
-    padding: 1rem;
-  }
+.nav-content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
 
-  section.logo fa-icon {
-    padding-right: 1rem;
-  }
+.nav-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  padding: 1rem;
+}
 
-  section.nav-top {
-    display: flex;
-    flex-direction: column;
-  }
+.nav-icon {
+  font-size: var(--fs-xlarge);
+  margin-right: 1.5rem;
+}
 
-  .nav-icon {
-    padding: 1rem 0;
-  }
+.app-name,
+.nav-name {
+  transform: scale(0);
+  transition: all 0.2s ease-in-out;
 }
 
 .open {
   width: var(--nav-width-mobile-open);
+
+  .app-name,
+  .nav-name {
+    transform: scale(1);
+  }
 }
 
-.nav-item {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  padding: 0 1rem;
-  width: 100%;
-  cursor: pointer;
-}
-
-.nav-item > * {
-  padding: 0 1rem;
-}
-
-.nav-name {
-  font-size: var(--fs-default);
-  transform: scale(0);
-  transition: all 0.2s ease-in-out;
-}
-
-.app-name {
-  font-size: var(--fs-xlarge);
-  transform: scale(0);
-  transition: all 0.2s ease-in-out;
-}
-
-.open .nav-name {
-  transform: scale(1);
-}
-
-.open .app-name {
-  transform: scale(1);
-}
-
-@media screen and (min-width: 650px) {
-  .nav-container {
+@media screen and (min-width: 640px) {
+  .container {
     width: var(--nav-width);
   }
 

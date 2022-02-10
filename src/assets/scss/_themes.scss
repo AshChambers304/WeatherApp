@@ -10,13 +10,13 @@
   .nav-item {
     &:hover {
       background-color: var(--hover-color);
+      transition: all 0.2s ease;
 
       .nav-icon {
         opacity: 1;
       }
     }
     .nav-icon {
-      transition: all 0.2s ease;
       cursor: pointer;
       opacity: 0.35;
     }

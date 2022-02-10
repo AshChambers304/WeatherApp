@@ -1,16 +1,10 @@
-:host {
-  display: block;
-  height: 100vh;
-  overflow: hidden;
-}
-
 .main-container {
   display: flex;
   height: 100%;
   width: 100%;
 
-  .content-container {
-    height: 100%;
+  section {
+    height: calc(100% - var(--header-height));
     width: 100%;
   }
 }

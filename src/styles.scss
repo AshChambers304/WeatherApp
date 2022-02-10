@@ -12,12 +12,21 @@
 }
 
 :root {
-  height: 100%;
-  width: 100%;
   @include m.font-size(f.$base-font-sizes);
 }
 
+html,
 body {
+  min-height: 100%;
+  min-width: 100%;
+}
+
+body {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
   background-color: var(--bg-color);
   color: var(--text-color);
   font-family: var(--ff-default);
