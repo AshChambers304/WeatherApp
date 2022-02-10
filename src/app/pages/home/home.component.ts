@@ -24,14 +24,15 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.locService
-      .getLocation('http://ip-api.com/json/')
+      .getLocation(
+        'https://api.ipgeolocation.io/ipgeo?apiKey=49a5d14471df45129ca6f68faadc4edd'
+      )
       .pipe(
         mergeMap((locData) => {
           this.locService.currentLocation = locData;
           return this.weatherService
             .getGeocoding(
-              `http://api.openweathermap.org/geo/1.0/direct?q=
-       ${this.locService.currentLocation.city},${this.locService.currentLocation.country}&limit=1&appid=3980f86beb307e02c02a934d721a19a7`
+              `https://api.openweathermap.org/geo/1.0/direct?q=${this.locService.currentLocation.city},${this.locService.currentLocation.country}&limit=1&appid=3980f86beb307e02c02a934d721a19a7`
             )
             .pipe(
               mergeMap((geoData) => {
@@ -61,8 +62,7 @@ export class HomeComponent implements OnInit {
             this.locService.currentLocation = locData;
             return this.weatherService
               .getGeocoding(
-                `http://api.openweathermap.org/geo/1.0/direct?q=
-       ${this.locService.currentLocation.city},${this.locService.currentLocation.country}&limit=1&appid=3980f86beb307e02c02a934d721a19a7`
+                `http://api.openweathermap.org/geo/1.0/direct?q=${this.locService.currentLocation.city},${this.locService.currentLocation.country}&limit=1&appid=3980f86beb307e02c02a934d721a19a7`
               )
               .pipe(
                 mergeMap((geoData) => {
