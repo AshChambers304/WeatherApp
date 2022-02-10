@@ -25,18 +25,13 @@ export class ThemeService {
       this.theme = 'light-theme';
     } else this.theme = localStorage.getItem('themeToken') || 'null';
 
-    if (localStorage.getItem('themeIconToken') === null) {
-      this.currentThemeIcon = this.moon;
-    } else {
-      this.currentThemeIcon = JSON.parse(
-        localStorage.getItem('themeIconToken') || 'null'
-      );
-    }
+    this.theme === 'light-theme'
+      ? (this.currentThemeIcon = this.moon)
+      : (this.currentThemeIcon = this.sun);
 
-    if (localStorage.getItem('themeNameToken') === null) {
-      this.currentThemeName = 'Dark Theme';
-    } else
-      this.currentThemeName = localStorage.getItem('themeNameToken') || 'null';
+    this.theme === 'light-theme'
+      ? (this.currentThemeName = 'Dark Theme')
+      : (this.currentThemeName = 'Light Theme');
 
     this.initializeTheme();
   }
@@ -61,12 +56,5 @@ export class ThemeService {
       : (this.currentThemeName = 'Dark Theme');
 
     localStorage.setItem('themeToken', this.theme);
-
-    localStorage.setItem(
-      'themeIconToken',
-      JSON.stringify(this.currentThemeIcon)
-    );
-
-    localStorage.setItem('themeNameToken', this.currentThemeName);
   }
 }

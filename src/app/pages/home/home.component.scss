@@ -4,4 +4,32 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  .weather-type {
+    font-size: var(--fs-xlarge);
+    font-weight: var(--fw-bold);
+  }
+
+  .weather-icon {
+    width: 200px;
+    height: auto;
+  }
+
+  .weather-details {
+    width: fit-content;
+    padding: 1rem;
+  }
+
+  .weather-details > * {
+    margin: 0 1rem;
+  }
+
+  .further-details {
+    width: fit-content;
+    padding: 1rem;
+  }
+
+  .further-details > * {
+    margin: 0 1rem;
+  }
 }
