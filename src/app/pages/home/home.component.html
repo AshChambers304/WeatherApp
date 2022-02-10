@@ -1,11 +1,11 @@
-<div class="container">
+<div class="container" *ngIf="this.isWeatherDataLoaded | async">
   <span class="weather-type">
     {{ this.currentWeather.weather[0].main }}
   </span>
   <img
     src="http://openweathermap.org/img/wn/{{
       this.currentWeather.weather[0].icon
-    }}@4x.png"
+    }}@2x.png"
     alt="weather icon"
     class="weather-icon"
   />
