@@ -48,8 +48,6 @@ export class HomeComponent implements OnInit {
         this.weatherService.currentWeather = weatherData;
         this.currentWeather = this.weatherService.currentWeather;
 
-        console.log(this.currentWeather);
-
         this.isWeatherDataLoaded = Promise.resolve(true);
       });
 
@@ -78,14 +76,10 @@ export class HomeComponent implements OnInit {
           this.weatherService.currentWeather = weatherData;
           this.currentWeather = this.weatherService.currentWeather;
 
-          console.log(this.currentWeather);
-
           this.isWeatherDataLoaded = Promise.resolve(true);
         });
 
       this.weatherService.pollTimer.pollCount++;
-
-      console.log('No. of updates: ' + this.weatherService.pollTimer.pollCount);
     }, 600000);
   }
 }
