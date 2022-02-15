@@ -1,4 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&family=Poppins:wght@300;400;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lobster&display=swap");
 
 //Map of base font-sizes based on screen size
 
@@ -13,8 +14,8 @@ $base-font-sizes: (
 :root {
   //Font-Families
 
-  --ff-default: "Poppins", sans-serif;
-  --ff-alt: "Open Sans", sans-serif;
+  --ff-default: "Open Sans", sans-serif;
+  --ff-alt: "Lobster", cursive;
 
   //Font-Sizes
 
@@ -27,5 +28,5 @@ $base-font-sizes: (
   //Font-Weights
 
   --fw-light: 300;
-  --fw-bold: 600;
+  --fw-bold: 700;
 }

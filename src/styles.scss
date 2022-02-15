@@ -13,6 +13,7 @@
 
 :root {
   @include m.font-size(f.$base-font-sizes);
+  overflow: hidden;
 }
 
 html,
@@ -51,7 +52,7 @@ input {
   padding: 1rem;
   border-radius: 9px;
   opacity: 0.75;
-  background-color: var(--brand-color);
+  background: var(--brand-color);
   color: var(--btn-txt-color);
   font-weight: 600;
   cursor: pointer;
@@ -60,4 +61,61 @@ input {
   &:hover {
     opacity: 1;
   }
+}
+
+.inline-scroller {
+  width: 80vw;
+  margin: 0 auto;
+  display: grid;
+  gap: 1rem;
+  grid-auto-flow: column;
+  grid-auto-columns: 21%;
+
+  padding: 1rem;
+
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+
+  font-size: var(--fs-xsmall);
+
+  .scroll-element {
+    display: grid;
+    grid-template-rows: min-content;
+    gap: 1rem;
+    padding: 1rem;
+    background: grey;
+    border-radius: 9px;
+    scroll-padding-inline: 1rem;
+    scroll-margin-inline: 1rem;
+    cursor: pointer;
+  }
+
+  .scroll-element.selected {
+    background: var(--brand-color);
+    color: #fff;
+  }
+}
+
+.snaps-inline {
+  scroll-snap-type: inline mandatory;
+}
+
+.snaps-inline > * {
+  scroll-snap-align: start;
+}
+
+::-webkit-scrollbar {
+  width: 0.25em;
+  height: 0.5em;
+}
+
+::-webkit-scrollbar-track {
+  background: #333;
+  border-radius: 100vw;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--brand-color);
+
+  border-radius: 100vw;
 }

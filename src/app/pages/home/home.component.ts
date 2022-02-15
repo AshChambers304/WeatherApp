@@ -1,9 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnInit,
+  Renderer2,
+  ViewChild,
+} from '@angular/core';
 import { WeatherService } from 'src/app/shared/services/weather.service';
 import { WeatherData } from 'src/app/shared/models/weather-data';
-import { LocationData } from 'src/app/shared/models/location-data';
 import { IPGeolocationService } from 'src/app/shared/services/ip-geolocation.service';
-import { GeoData } from 'src/app/shared/models/geo-data';
 import { mergeMap } from 'rxjs';
 
 @Component({
@@ -11,9 +15,12 @@ import { mergeMap } from 'rxjs';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
+  @ViewChild('day') day!: ViewChild;
+
   constructor(
     private weatherService: WeatherService,
-    private locService: IPGeolocationService
+    private locService: IPGeolocationService,
+    private renderer: Renderer2
   ) {}
 
   public pollTimer = this.weatherService.pollTimer;
@@ -81,5 +88,15 @@ export class HomeComponent implements OnInit {
 
       this.weatherService.pollTimer.pollCount++;
     }, 600000);
+  }
+
+  setSelectedDay(id: number): void {
+    let elements = document.getElementsByClassName('scroll-element');
+
+    for (let i = 0; i < elements.length; i++) {
+      if (id == i) {
+        this.renderer.addClass(elements[i], 'selected');
+      } else this.renderer.removeClass(elements[i], 'selected');
+    }
   }
 }
