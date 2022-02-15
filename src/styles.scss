@@ -64,14 +64,10 @@ input {
 }
 
 .inline-scroller {
-  width: 80vw;
-  margin: 0 auto;
   display: grid;
   gap: 1rem;
   grid-auto-flow: column;
-  grid-auto-columns: 21%;
-
-  padding: 1rem;
+  grid-auto-columns: 1fr;
 
   overflow-x: auto;
   overscroll-behavior-inline: contain;
@@ -79,14 +75,15 @@ input {
   font-size: var(--fs-xsmall);
 
   .scroll-element {
+    min-width: 150px;
     display: grid;
-    grid-template-rows: min-content;
+    grid-auto-flow: column;
+    grid-template-columns: min-content;
+    justify-content: space-between;
+    align-items: center;
     gap: 1rem;
     padding: 1rem;
-    background: grey;
     border-radius: 9px;
-    scroll-padding-inline: 1rem;
-    scroll-margin-inline: 1rem;
     cursor: pointer;
   }
 
@@ -110,7 +107,7 @@ input {
 }
 
 ::-webkit-scrollbar-track {
-  background: #333;
+  background: var(--text-color);
   border-radius: 100vw;
 }
 
