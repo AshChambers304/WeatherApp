@@ -91,7 +91,7 @@ export class HomeComponent implements OnInit {
   }
 
   setSelectedDay(id: number): void {
-    let elements = document.getElementsByClassName('scroll-element');
+    let elements = document.getElementsByClassName('element-wrapper');
 
     for (let i = 0; i < elements.length; i++) {
       if (id == i) {

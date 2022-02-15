@@ -40,8 +40,6 @@ input {
 }
 
 .box {
-  margin: 1rem;
-  padding: 1rem;
   border-radius: 9px;
   background-color: var(--box-color);
   box-shadow: var(--box-shadow);
@@ -64,39 +62,62 @@ input {
 }
 
 .inline-scroller {
+  --_spacer: 3rem;
   display: grid;
-  gap: 1rem;
+  justify-content: center;
+  gap: var(--_spacer);
+  padding: var(--_spacer);
   grid-auto-flow: column;
-  grid-auto-columns: 1fr;
-
-  padding: 1rem;
+  grid-auto-columns: 100px;
 
   overflow-x: auto;
   overscroll-behavior-inline: contain;
 
-  font-size: var(--fs-xsmall);
-
-  .scroll-element {
-    min-width: 150px;
-    display: grid;
-    grid-auto-flow: column;
-    grid-template-columns: min-content;
-    justify-content: space-between;
-    align-items: center;
-    gap: 1rem;
-    padding: 1rem;
-    border-radius: 9px;
-    cursor: pointer;
+  .element-wrapper.selected {
+    .scroll-element.border::before {
+      opacity: 1;
+    }
   }
 
-  .scroll-element.selected {
+  .scroll-element {
+    width: 80px;
+    height: 80px;
+    gap: var(--_spacer);
+    padding: var(--_spacer);
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .scroll-element.border {
+    position: relative;
+  }
+
+  .scroll-element.border::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 50%;
+    padding: 5px;
     background: var(--brand-color);
-    color: #fff;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: all 0.2s ease-in-out;
   }
 }
 
 .snaps-inline {
   scroll-snap-type: inline mandatory;
+  scroll-padding-inline: var(--_spacer, 1rem);
 }
 
 .snaps-inline > * {
@@ -105,11 +126,11 @@ input {
 
 ::-webkit-scrollbar {
   width: 0.25em;
-  height: 0.5em;
+  height: 1em;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--text-color);
+  background: rgba(166, 101, 219, 0.158);
   border-radius: 100vw;
 }
 
@@ -117,4 +138,10 @@ input {
   background: var(--brand-color);
 
   border-radius: 100vw;
+}
+
+@media screen and (max-width: 924px) {
+  .inline-scroller {
+    justify-content: start;
+  }
 }
