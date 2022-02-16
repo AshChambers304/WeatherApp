@@ -124,22 +124,6 @@ input {
   scroll-snap-align: start;
 }
 
-::-webkit-scrollbar {
-  width: 0.25em;
-  height: 1em;
-}
-
-::-webkit-scrollbar-track {
-  background: rgba(166, 101, 219, 0.158);
-  border-radius: 100vw;
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--brand-color);
-
-  border-radius: 100vw;
-}
-
 @media screen and (max-width: 924px) {
   .inline-scroller {
     justify-content: start;

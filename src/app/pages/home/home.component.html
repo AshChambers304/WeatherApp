@@ -3,96 +3,30 @@
     {{ this.currentWeather.name }}, {{ this.currentWeather.sys.country }}
   </h1>
   <div class="inline-scroller snaps-inline">
-    <div class="element-wrapper">
+    <div
+      class="element-wrapper"
+      *ngFor="let day of this.dayWeather; let i = index"
+    >
       <div
         class="scroll-element box border"
-        ngModel
-        #day
-        (click)="setSelectedDay(0)"
+        (click)="setSelectedDay(i)"
+        routerLink="{{ dayWeather[i].route }}"
       >
         <div class="date">
-          <span class="bold">Sun</span>
-          <span>15/2</span>
+          <span class="bold">{{ dayWeather[i].day }}</span>
+          <span>{{ dayWeather[i].date }}</span>
         </div>
       </div>
     </div>
-    <div class="element-wrapper">
-      <div
-        class="scroll-element box border"
-        ngModel
-        #day
-        (click)="setSelectedDay(1)"
-      >
-        <div class="date">
-          <span class="bold">Sun</span>
-          <span>15/2</span>
-        </div>
-      </div>
-    </div>
-    <div class="element-wrapper">
-      <div
-        class="scroll-element box border"
-        ngModel
-        #day
-        (click)="setSelectedDay(2)"
-      >
-        <div class="date">
-          <span class="bold">Sun</span>
-          <span>15/2</span>
-        </div>
-      </div>
-    </div>
-    <div class="element-wrapper">
-      <div
-        class="scroll-element box border"
-        ngModel
-        #day
-        (click)="setSelectedDay(3)"
-      >
-        <div class="date">
-          <span class="bold">Sun</span>
-          <span>15/2</span>
-        </div>
-      </div>
-    </div>
-    <div class="element-wrapper">
-      <div
-        class="scroll-element box border"
-        ngModel
-        #day
-        (click)="setSelectedDay(4)"
-      >
-        <div class="date">
-          <span class="bold">Sun</span>
-          <span>15/2</span>
-        </div>
-      </div>
-    </div>
-    <div class="element-wrapper">
-      <div
-        class="scroll-element box border"
-        ngModel
-        #day
-        (click)="setSelectedDay(5)"
-      >
-        <div class="date">
-          <span class="bold">Sun</span>
-          <span>15/2</span>
-        </div>
-      </div>
-    </div>
-    <div class="element-wrapper">
-      <div
-        class="scroll-element box border"
-        ngModel
-        #day
-        (click)="setSelectedDay(6)"
-      >
-        <div class="date">
-          <span class="bold">Sun</span>
-          <span>15/2</span>
-        </div>
-      </div>
-    </div>
+  </div>
+  <div [ngSwitch]="this.day">
+    <div *ngSwitchCase="'day1'">this is day 1</div>
+    <div *ngSwitchCase="'day2'">this is day 2</div>
+    <div *ngSwitchCase="'day3'">this is day 3</div>
+    <div *ngSwitchCase="'day4'">this is day 4</div>
+    <div *ngSwitchCase="'day5'">this is day 5</div>
+    <div *ngSwitchCase="'day6'">this is day 6</div>
+    <div *ngSwitchCase="'day7'">this is day 7</div>
+    <div *ngSwitchDefault>This is day 2</div>
   </div>
 </div>

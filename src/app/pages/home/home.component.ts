@@ -1,33 +1,78 @@
-import {
-  Component,
-  ElementRef,
-  OnInit,
-  Renderer2,
-  ViewChild,
-} from '@angular/core';
+import { AfterContentInit, Component, OnInit, Renderer2 } from '@angular/core';
 import { WeatherService } from 'src/app/shared/services/weather.service';
 import { WeatherData } from 'src/app/shared/models/weather-data';
 import { IPGeolocationService } from 'src/app/shared/services/ip-geolocation.service';
 import { mergeMap } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent implements OnInit {
-  @ViewChild('day') day!: ViewChild;
-
+export class HomeComponent implements OnInit, AfterContentInit {
   constructor(
     private weatherService: WeatherService,
     private locService: IPGeolocationService,
-    private renderer: Renderer2
-  ) {}
+    private renderer: Renderer2,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {
+    console.log();
 
-  public pollTimer = this.weatherService.pollTimer;
+    this.router.events.subscribe((val) => {
+      this.day = this.route.snapshot.firstChild?.params['type'];
+    });
+  }
+
+  public currentWeather: WeatherData = this.weatherService.currentWeather;
 
   public isWeatherDataLoaded: Promise<boolean> = Promise.resolve(false);
 
-  public currentWeather: WeatherData = this.weatherService.currentWeather;
+  public pollTimer = this.weatherService.pollTimer;
+
+  public dayWeather: {
+    route: string;
+    day: string;
+    date: string;
+  }[] = [
+    {
+      route: 'day1',
+      day: 'Sun',
+      date: '17/02',
+    },
+    {
+      route: 'day2',
+      day: 'Mon',
+      date: '18/02',
+    },
+    {
+      route: 'day3',
+      day: 'Tue',
+      date: '19/02',
+    },
+    {
+      route: 'day4',
+      day: 'Wed',
+      date: '20/02',
+    },
+    {
+      route: 'day5',
+      day: 'Thu',
+      date: '21/02',
+    },
+    {
+      route: 'day6',
+      day: 'Fri',
+      date: '22/02',
+    },
+    {
+      route: 'day7',
+      day: 'Sat',
+      date: '23/02',
+    },
+  ];
+
+  public day!: string;
 
   ngOnInit(): void {
     this.locService
@@ -90,13 +135,24 @@ export class HomeComponent implements OnInit {
     }, 600000);
   }
 
+  ngAfterContentInit(): void {
+    for (let i = 0; i < this.dayWeather.length; i++) {
+      if (
+        this.route.snapshot.firstChild?.params['type'] ==
+        this.dayWeather[i].route
+      ) {
+        this.setSelectedDay(i);
+      }
+    }
+  }
+
   setSelectedDay(id: number): void {
     let elements = document.getElementsByClassName('element-wrapper');
 
     for (let i = 0; i < elements.length; i++) {
       if (id == i) {
-        this.renderer.addClass(elements[i], 'selected');
-      } else this.renderer.removeClass(elements[i], 'selected');
+        elements[i].classList.add('selected');
+      } else elements[i].classList.remove('selected');
     }
   }
 }
