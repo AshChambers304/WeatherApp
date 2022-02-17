@@ -11,7 +11,7 @@ const routes: Routes = [
     children: [{ path: ':type', component: HomeComponent }],
   },
   { path: 'search', component: SearchComponent },
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: '', redirectTo: '/home/day2', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent },
 ];
 

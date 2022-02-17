@@ -1,32 +1,42 @@
 <div class="container" *ngIf="this.isWeatherDataLoaded | async">
-  <h1 class="location">
-    {{ this.currentWeather.name }}, {{ this.currentWeather.sys.country }}
-  </h1>
+  <h1 class="location"></h1>
   <div class="inline-scroller snaps-inline">
     <div
       class="element-wrapper"
+      routerLink="{{ dayWeather[i].route }}"
+      routerLinkActive="selected"
       *ngFor="let day of this.dayWeather; let i = index"
     >
-      <div
-        class="scroll-element box border"
-        (click)="setSelectedDay(i)"
-        routerLink="{{ dayWeather[i].route }}"
-      >
+      <div class="scroll-element box border">
         <div class="date">
-          <span class="bold">{{ dayWeather[i].day }}</span>
-          <span>{{ dayWeather[i].date }}</span>
+          <span class="bold">{{ dayWeather[i].date.slice(0, 3) }}</span>
+          <span class="inline">{{ dayWeather[i].date.slice(5, 11) }}</span>
         </div>
       </div>
     </div>
   </div>
   <div [ngSwitch]="this.day">
-    <div *ngSwitchCase="'day1'">this is day 1</div>
-    <div *ngSwitchCase="'day2'">this is day 2</div>
-    <div *ngSwitchCase="'day3'">this is day 3</div>
-    <div *ngSwitchCase="'day4'">this is day 4</div>
-    <div *ngSwitchCase="'day5'">this is day 5</div>
-    <div *ngSwitchCase="'day6'">this is day 6</div>
-    <div *ngSwitchCase="'day7'">this is day 7</div>
+    <div *ngSwitchCase="'day1'">
+      {{ this.currentWeather.daily[0].weather[0].main }}
+    </div>
+    <div *ngSwitchCase="'day2'">
+      {{ this.currentWeather.daily[0].weather[0].main }}
+    </div>
+    <div *ngSwitchCase="'day3'">
+      {{ this.currentWeather.daily[1].weather[0].main }}
+    </div>
+    <div *ngSwitchCase="'day4'">
+      {{ this.currentWeather.daily[2].weather[0].main }}
+    </div>
+    <div *ngSwitchCase="'day5'">
+      {{ this.currentWeather.daily[3].weather[0].main }}
+    </div>
+    <div *ngSwitchCase="'day6'">
+      {{ this.currentWeather.daily[4].weather[0].main }}
+    </div>
+    <div *ngSwitchCase="'day7'">
+      {{ this.currentWeather.daily[5].weather[0].main }}
+    </div>
     <div *ngSwitchDefault>This is day 2</div>
   </div>
 </div>

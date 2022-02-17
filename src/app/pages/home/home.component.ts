@@ -9,7 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent implements OnInit, AfterContentInit {
+export class HomeComponent implements OnInit {
   constructor(
     private weatherService: WeatherService,
     private locService: IPGeolocationService,
@@ -32,43 +32,42 @@ export class HomeComponent implements OnInit, AfterContentInit {
 
   public dayWeather: {
     route: string;
-    day: string;
     date: string;
   }[] = [
     {
       route: 'day1',
-      day: 'Sun',
-      date: '17/02',
+
+      date: '',
     },
     {
       route: 'day2',
-      day: 'Mon',
-      date: '18/02',
+
+      date: '',
     },
     {
       route: 'day3',
-      day: 'Tue',
-      date: '19/02',
+
+      date: '',
     },
     {
       route: 'day4',
-      day: 'Wed',
-      date: '20/02',
+
+      date: '',
     },
     {
       route: 'day5',
-      day: 'Thu',
-      date: '21/02',
+
+      date: '',
     },
     {
       route: 'day6',
-      day: 'Fri',
-      date: '22/02',
+
+      date: '',
     },
     {
       route: 'day7',
-      day: 'Sat',
-      date: '23/02',
+
+      date: '',
     },
   ];
 
@@ -90,7 +89,7 @@ export class HomeComponent implements OnInit, AfterContentInit {
               mergeMap((geoData) => {
                 this.weatherService.geoData = geoData;
                 return this.weatherService.getWeather(
-                  `https://api.openweathermap.org/data/2.5/weather?lat=${this.weatherService.geoData[0].lat}&lon=${this.weatherService.geoData[0].lon}&appid=3980f86beb307e02c02a934d721a19a7`
+                  `https://api.openweathermap.org/data/2.5/onecall?lat=${this.weatherService.geoData[0].lat}&lon=${this.weatherService.geoData[0].lon}&appid=3980f86beb307e02c02a934d721a19a7`
                 );
               })
             );
@@ -100,6 +99,13 @@ export class HomeComponent implements OnInit, AfterContentInit {
         this.weatherService.currentWeather = weatherData;
         this.currentWeather = this.weatherService.currentWeather;
 
+        for (let i = 0; i < this.dayWeather.length; i++) {
+          this.dayWeather[i].date = new Date(
+            this.currentWeather.daily[i].dt * 1000
+          ).toUTCString();
+        }
+
+        console.log(this.dayWeather);
         this.isWeatherDataLoaded = Promise.resolve(true);
       });
 
@@ -118,7 +124,7 @@ export class HomeComponent implements OnInit, AfterContentInit {
                 mergeMap((geoData) => {
                   this.weatherService.geoData = geoData;
                   return this.weatherService.getWeather(
-                    `https://api.openweathermap.org/data/2.5/weather?lat=${this.weatherService.geoData[0].lat}&lon=${this.weatherService.geoData[0].lon}&appid=3980f86beb307e02c02a934d721a19a7`
+                    `https://api.openweathermap.org/data/2.5/onecall?lat=${this.weatherService.geoData[0].lat}&lon=${this.weatherService.geoData[0].lon}&appid=3980f86beb307e02c02a934d721a19a7`
                   );
                 })
               );
@@ -133,26 +139,5 @@ export class HomeComponent implements OnInit, AfterContentInit {
 
       this.weatherService.pollTimer.pollCount++;
     }, 600000);
-  }
-
-  ngAfterContentInit(): void {
-    for (let i = 0; i < this.dayWeather.length; i++) {
-      if (
-        this.route.snapshot.firstChild?.params['type'] ==
-        this.dayWeather[i].route
-      ) {
-        this.setSelectedDay(i);
-      }
-    }
-  }
-
-  setSelectedDay(id: number): void {
-    let elements = document.getElementsByClassName('element-wrapper');
-
-    for (let i = 0; i < elements.length; i++) {
-      if (id == i) {
-        elements[i].classList.add('selected');
-      } else elements[i].classList.remove('selected');
-    }
   }
 }

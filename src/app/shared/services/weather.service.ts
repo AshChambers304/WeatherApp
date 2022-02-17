@@ -65,33 +65,31 @@ export class WeatherService {
   ];
 
   public currentWeather: WeatherData = {
-    coord: { lon: 0, lat: 0 },
-    weather: [],
-    base: '',
-    main: {
-      temp: 0,
+    alerts: [],
+    current: {
+      clouds: 0,
+      dew_point: 0,
+      dt: 0,
       feels_like: 0,
-      temp_min: 0,
-      temp_max: 0,
-      pressure: 0,
       humidity: 0,
-    },
-    visibility: 0,
-    wind: { speed: 0, deg: 0 },
-    clouds: { all: 0 },
-    dt: 0,
-    sys: {
-      type: 0,
-      id: 0,
-      message: 0,
-      country: '',
+      pressure: 0,
       sunrise: 0,
       sunset: 0,
+      temp: 0,
+      uvi: 0,
+      visibility: 0,
+      weather: [],
+      wind_deg: 0,
+      wind_gust: 0,
+      wind_speed: 0,
     },
-    timezone: 0,
-    id: 0,
-    name: '',
-    cod: 0,
+    daily: [],
+    hourly: [],
+    lat: 0,
+    lon: 0,
+    minutely: [],
+    timezone: '',
+    timezone_offset: 0,
   };
 
   constructor(private http: HttpClient) {}
