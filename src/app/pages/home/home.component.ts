@@ -1,15 +1,18 @@
-import { AfterContentInit, Component, OnInit, Renderer2 } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 import { WeatherService } from 'src/app/shared/services/weather.service';
 import { WeatherData } from 'src/app/shared/models/weather-data';
 import { IPGeolocationService } from 'src/app/shared/services/ip-geolocation.service';
 import { mergeMap } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
+import { faWater } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
+  faWater = faWater;
+
   constructor(
     private weatherService: WeatherService,
     private locService: IPGeolocationService,
@@ -25,6 +28,8 @@ export class HomeComponent implements OnInit {
   }
 
   public currentWeather: WeatherData = this.weatherService.currentWeather;
+
+  public currentLocationName: string = '';
 
   public isWeatherDataLoaded: Promise<boolean> = Promise.resolve(false);
 
@@ -88,8 +93,9 @@ export class HomeComponent implements OnInit {
             .pipe(
               mergeMap((geoData) => {
                 this.weatherService.geoData = geoData;
+                this.currentLocationName = geoData[0].name;
                 return this.weatherService.getWeather(
-                  `https://api.openweathermap.org/data/2.5/onecall?lat=${this.weatherService.geoData[0].lat}&lon=${this.weatherService.geoData[0].lon}&appid=3980f86beb307e02c02a934d721a19a7`
+                  `https://api.openweathermap.org/data/2.5/onecall?lat=${this.weatherService.geoData[0].lat}&lon=${this.weatherService.geoData[0].lon}&units=metric&appid=3980f86beb307e02c02a934d721a19a7`
                 );
               })
             );

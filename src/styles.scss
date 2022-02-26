@@ -46,6 +46,19 @@ input {
   transition: all 0.2s ease;
 }
 
+.glass {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0)
+  );
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
 .btn {
   padding: 1rem;
   border-radius: 9px;
@@ -62,11 +75,12 @@ input {
 }
 
 .inline-scroller {
-  --_spacer: 3rem;
+  --_spacer: 1rem;
   display: grid;
   justify-content: center;
   gap: var(--_spacer);
   padding: var(--_spacer);
+  margin: 1rem 0;
   grid-auto-flow: column;
   grid-auto-columns: 100px;
 
@@ -80,8 +94,8 @@ input {
   }
 
   .scroll-element {
-    width: 120px;
-    height: 120px;
+    width: 100px;
+    height: 100px;
     gap: var(--_spacer);
     border-radius: 50%;
     cursor: pointer;
@@ -121,6 +135,10 @@ input {
 
 .snaps-inline > * {
   scroll-snap-align: start;
+}
+
+.center-text {
+  text-align: center;
 }
 
 @media screen and (max-width: 924px) {

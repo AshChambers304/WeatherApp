@@ -4,4 +4,13 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
+
+  .theme-switch {
+    padding: 1rem;
+    cursor: pointer;
+  }
+
+  .theme-switch > * {
+    padding: 0 0.25rem;
+  }
 }

@@ -13,20 +13,10 @@ export class NavigationComponent implements OnInit {
   faSearch = faSearch;
   faBolt = faBolt;
 
-  public themeName = this.themeService.currentThemeName;
-  public themeIcon = this.themeService.currentThemeIcon;
-
   constructor(
     public navService: NavigationService,
     private themeService: ThemeService
   ) {}
-
-  switchTheme(): void {
-    this.themeService.switchTheme();
-
-    this.themeName = this.themeService.currentThemeName;
-    this.themeIcon = this.themeService.currentThemeIcon;
-  }
 
   ngOnInit(): void {}
 }

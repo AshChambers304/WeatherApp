@@ -1,8 +1,9 @@
 <header>
-  <div class="hamburger" (click)="toggleSideNav()">
-    <fa-icon [icon]="faBars"></fa-icon>
-  </div>
   <div class="date">
     <span class="date" id="clock">{{ this.currentTime }}</span>
+  </div>
+  <div class="theme-switch" (click)="this.switchTheme()">
+    <fa-icon class="nav-icon" id="theme-icon" [icon]="this.themeIcon"></fa-icon
+    ><span class="nav-name" id="theme-name">{{ this.themeName }}</span>
   </div>
 </header>
