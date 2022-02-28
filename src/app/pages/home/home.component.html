@@ -7,7 +7,7 @@
       routerLinkActive="selected"
       *ngFor="let day of this.dayWeather; let i = index"
     >
-      <div class="scroll-element box border">
+      <div class="scroll-element border" (click)="setSelectedDay(i)">
         <div class="date">
           <span class="bold">{{ dayWeather[i].date.slice(0, 3) }}</span>
           <span class="inline">{{ dayWeather[i].date.slice(5, 11) }}</span>
@@ -16,147 +16,89 @@
     </div>
   </div>
   <main>
-    <div [ngSwitch]="this.day">
-      <div *ngSwitchCase="'day1'">
-        <div class="main-weather-info glass">
-          <img
-            src="../../../assets/weather-icons/weather-icon-sun.png"
-            alt="Weather logo"
-          />
-          <div class="info">
-            <span class="weather-desc">{{
-              this.currentWeather.daily[0].weather[0].description
-            }}</span>
-            <span class="weather-temp"
-              >{{ this.currentWeather.daily[0].temp.day }} &#8451;</span
+    <div class="main-weather-info glass">
+      <img
+        src="../../../assets/weather-icons/{{
+          this.currentWeather.daily[this.selectedDay].weather[0].icon
+        }}.svg"
+        alt="Weather logo"
+        class="weather-icon"
+      />
+      <div class="info">
+        <span class="weather-desc">{{
+          this.currentWeather.daily[this.selectedDay].weather[0].description
+        }}</span>
+        <span class="weather-temp"
+          >{{
+            this.currentWeather.daily[this.selectedDay].temp.day
+          }}
+          &#8451;</span
+        >
+      </div>
+    </div>
+    <div class="info-container">
+      <div class="more-info-container">
+        <div class="more-info box">
+          <div class="more-info-item">
+            <fa-icon [icon]="faWater"></fa-icon>
+            <div class="info-value">
+              {{ this.currentWeather.daily[this.selectedDay].humidity }} &#37;
+            </div>
+            <div class="info-desc">Humidity</div>
+          </div>
+          <div class="more-info-item">
+            <fa-icon [icon]="faCloudDownloadAlt"></fa-icon>
+            <div class="info-value">
+              {{ this.currentWeather.daily[this.selectedDay].pressure }} hPa
+            </div>
+            <div class="info-desc">Pressure</div>
+          </div>
+          <div class="more-info-item">
+            <fa-icon [icon]="faSun"></fa-icon>
+            <div class="info-value">
+              {{ this.currentWeather.daily[this.selectedDay].uvi }}
+            </div>
+            <div class="info-desc">UV</div>
+          </div>
+          <div class="more-info-item">
+            <ng-container
+              *ngIf="this.currentWeather.daily[this.selectedDay].rain"
             >
+              <fa-icon [icon]="faWater"></fa-icon>
+              <div class="info-value">
+                {{ this.currentWeather.daily[this.selectedDay].rain }}
+              </div>
+              <div class="info-desc">Precipitation</div>
+            </ng-container>
+            <ng-container
+              *ngIf="!this.currentWeather.daily[this.selectedDay].rain"
+            >
+              <fa-icon [icon]="faHandHoldingWater"></fa-icon>
+              <div class="info-value">
+                {{ this.currentWeather.daily[this.selectedDay].pop }}
+              </div>
+              <div class="info-desc text-center">
+                Probability of <br />
+                Precipitation
+              </div>
+            </ng-container>
           </div>
-        </div>
-        <div class="info-container">
-          <div class="more-info-container">
-            <div class="more-info box">
-              <div class="more-info-item">
-                <fa-icon [icon]="faWater"></fa-icon>
-                <div class="info-value">
-                  {{ this.currentWeather.daily[0].humidity }} &#37;
-                </div>
-                <div class="info-desc">Humidity</div>
-              </div>
-              <div class="more-info-item">
-                <fa-icon [icon]="faWater"></fa-icon>
-                <div class="info-value">
-                  {{ this.currentWeather.daily[0].pressure }} hPa
-                </div>
-                <div class="info-desc">Pressure</div>
-              </div>
-              <div class="more-info-item">
-                <fa-icon [icon]="faWater"></fa-icon>
-                <div class="info-value">
-                  {{ this.currentWeather.daily[0].uvi }}
-                </div>
-                <div class="info-desc">UV</div>
-              </div>
-              <div class="more-info-item">
-                <ng-container *ngIf="this.currentWeather.daily[0].rain">
-                  <fa-icon [icon]="faWater"></fa-icon>
-                  <div class="info-value">
-                    {{ this.currentWeather.daily[0].rain }}
-                  </div>
-                  <div class="info-desc">Precipitation</div>
-                </ng-container>
-                <ng-container *ngIf="!this.currentWeather.daily[0].rain">
-                  <fa-icon [icon]="faWater"></fa-icon>
-                  <div class="info-value">
-                    {{ this.currentWeather.daily[0].pop }}
-                  </div>
-                  <div class="info-desc text-center">
-                    Probability of <br />
-                    Precipitation
-                  </div>
-                </ng-container>
-              </div>
-              <div class="more-info-item">
-                <fa-icon [icon]="faWater"></fa-icon>
-                <div class="info-value">
-                  {{ this.currentWeather.daily[0].wind_speed }} m/s
-                </div>
-                <div class="info-desc">Wind Speed</div>
-              </div>
-              <div class="more-info-item">
-                <fa-icon [icon]="faWater"></fa-icon>
-                <div class="info-value">
-                  {{ this.currentWeather.daily[0].feels_like.day }} &#8451;
-                </div>
-                <div class="info-desc">Feels Like</div>
-              </div>
+          <div class="more-info-item">
+            <fa-icon [icon]="faWind"></fa-icon>
+            <div class="info-value">
+              {{ this.currentWeather.daily[this.selectedDay].wind_speed }} m/s
             </div>
+            <div class="info-desc">Wind Speed</div>
           </div>
-          <div class="more-info-container">
-            <div class="more-info box">
-              <div class="more-info-item">
-                <fa-icon [icon]="faWater"></fa-icon>
-                <div class="info-value">
-                  {{ this.currentWeather.daily[0].humidity }}
-                </div>
-                <div class="info-desc">Humidity</div>
-              </div>
-              <div class="more-info-item">
-                <fa-icon [icon]="faWater"></fa-icon>
-                <div class="info-value">
-                  {{ this.currentWeather.daily[0].humidity }}
-                </div>
-                <div class="info-desc">Humidity</div>
-              </div>
-              <div class="more-info-item">
-                <fa-icon [icon]="faWater"></fa-icon>
-                <div class="info-value">
-                  {{ this.currentWeather.daily[0].humidity }}
-                </div>
-                <div class="info-desc">Humidity</div>
-              </div>
-              <div class="more-info-item">
-                <fa-icon [icon]="faWater"></fa-icon>
-                <div class="info-value">
-                  {{ this.currentWeather.daily[0].humidity }}
-                </div>
-                <div class="info-desc">Humidity</div>
-              </div>
-              <div class="more-info-item">
-                <fa-icon [icon]="faWater"></fa-icon>
-                <div class="info-value">
-                  {{ this.currentWeather.daily[0].humidity }}
-                </div>
-                <div class="info-desc">Humidity</div>
-              </div>
-              <div class="more-info-item">
-                <fa-icon [icon]="faWater"></fa-icon>
-                <div class="info-value">
-                  {{ this.currentWeather.daily[0].humidity }}
-                </div>
-                <div class="info-desc">Humidity</div>
-              </div>
+          <div class="more-info-item">
+            <fa-icon [icon]="faWater"></fa-icon>
+            <div class="info-value">
+              {{ this.currentWeather.daily[this.selectedDay].feels_like.day }}
+              &#8451;
             </div>
+            <div class="info-desc">Feels Like</div>
           </div>
         </div>
-        <div *ngSwitchCase="'day2'">
-          {{ this.currentWeather.daily[0].weather[0].main }}
-        </div>
-        <div *ngSwitchCase="'day3'">
-          {{ this.currentWeather.daily[1].weather[0].main }}
-        </div>
-        <div *ngSwitchCase="'day4'">
-          {{ this.currentWeather.daily[2].weather[0].main }}
-        </div>
-        <div *ngSwitchCase="'day5'">
-          {{ this.currentWeather.daily[3].weather[0].main }}
-        </div>
-        <div *ngSwitchCase="'day6'">
-          {{ this.currentWeather.daily[4].weather[0].main }}
-        </div>
-        <div *ngSwitchCase="'day7'">
-          {{ this.currentWeather.daily[5].weather[0].main }}
-        </div>
-        <div *ngSwitchDefault>This is day 2</div>
       </div>
     </div>
   </main>

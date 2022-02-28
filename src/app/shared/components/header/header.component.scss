@@ -6,11 +6,28 @@ header {
   padding: 1rem;
 
   .theme-switch {
+    display: flex;
     padding: 1rem;
     cursor: pointer;
   }
 
+  .title {
+    font-family: var(--ff-alt);
+    font-size: var(--fs-xlarge);
+    font-weight: var(--fw-bold);
+
+    display: none;
+  }
+
   .theme-switch > * {
     padding: 0 0.25rem;
+  }
+}
+
+@media screen and (min-width: 400px) {
+  header {
+    .title {
+      display: flex;
+    }
   }
 }

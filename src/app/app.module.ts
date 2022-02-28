@@ -10,7 +10,6 @@ import { NavigationComponent } from './shared/components/navigation/navigation.c
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HeaderComponent } from './shared/components/header/header.component';
 import { WeatherService } from './shared/services/weather.service';
-import { IPGeolocationService } from './shared/services/ip-geolocation.service';
 import { ThemeService } from './shared/services/theme.service';
 
 @NgModule({
@@ -28,7 +27,7 @@ import { ThemeService } from './shared/services/theme.service';
     AppRoutingModule,
     FontAwesomeModule,
   ],
-  providers: [IPGeolocationService],
+  providers: [WeatherService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

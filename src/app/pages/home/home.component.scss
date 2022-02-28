@@ -20,13 +20,13 @@
 
   .main-weather-info {
     img {
-      max-width: 50px;
+      min-width: 200px;
       height: auto;
     }
     max-width: 80%;
     display: flex;
-    padding: 2rem 3rem;
-    margin: 0 auto;
+    padding: 1rem;
+    margin: 2rem auto;
     align-items: center;
     justify-content: space-between;
 
@@ -35,6 +35,10 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
+    }
+
+    .weather-desc {
+      text-transform: capitalize;
     }
 
     .weather-temp {
@@ -54,7 +58,7 @@
     align-items: center;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr;
-    gap: 2rem;
+    gap: 1rem;
 
     .more-info-item > * {
       margin: 0.25rem 0;
@@ -71,11 +75,15 @@
       }
 
       .info-value {
-        font-size: var(--fs-xlarge);
+        font-size: var(--fs-large);
         font-weight: var(--fw-bold);
       }
     }
   }
+}
+
+fa-icon {
+  font-size: var(--fs-large);
 }
 
 @media screen and (min-width: 640px) {

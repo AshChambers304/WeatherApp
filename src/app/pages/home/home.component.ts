@@ -1,10 +1,16 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
 import { WeatherService } from 'src/app/shared/services/weather.service';
 import { WeatherData } from 'src/app/shared/models/weather-data';
-import { IPGeolocationService } from 'src/app/shared/services/ip-geolocation.service';
-import { mergeMap } from 'rxjs';
+import { mergeMap, map } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
-import { faWater } from '@fortawesome/free-solid-svg-icons';
+import {
+  faWater,
+  faWind,
+  faHandHoldingWater,
+  faSun,
+  faCloudDownloadAlt,
+} from '@fortawesome/free-solid-svg-icons';
+import { GeoData } from 'src/app/shared/models/geo-data';
 
 @Component({
   templateUrl: './home.component.html',
@@ -12,10 +18,13 @@ import { faWater } from '@fortawesome/free-solid-svg-icons';
 })
 export class HomeComponent implements OnInit {
   faWater = faWater;
+  faSun = faSun;
+  faWind = faWind;
+  faCloudDownloadAlt = faCloudDownloadAlt;
+  faHandHoldingWater = faHandHoldingWater;
 
   constructor(
     private weatherService: WeatherService,
-    private locService: IPGeolocationService,
     private renderer: Renderer2,
     private router: Router,
     private route: ActivatedRoute
@@ -78,32 +87,48 @@ export class HomeComponent implements OnInit {
 
   public day!: string;
 
+  public selectedDay!: number;
+
+  setSelectedDay(dayID: number) {
+    this.selectedDay = dayID;
+  }
+
   ngOnInit(): void {
-    this.locService
-      .getLocation(
-        'https://api.ipgeolocation.io/ipgeo?apiKey=49a5d14471df45129ca6f68faadc4edd'
-      )
+    this.setSelectedDay(0);
+
+    this.isWeatherDataLoaded = Promise.resolve(false);
+    this.weatherService
+      .getLocation()
       .pipe(
-        mergeMap((locData) => {
-          this.locService.currentLocation = locData;
+        mergeMap((position) => {
+          this.weatherService.currentLocation = position;
+          this.weatherService.lat =
+            this.weatherService.currentLocation.coords.latitude;
+          this.weatherService.lon =
+            this.weatherService.currentLocation.coords.longitude;
+
           return this.weatherService
-            .getGeocoding(
-              `https://api.openweathermap.org/geo/1.0/direct?q=${this.locService.currentLocation.city},${this.locService.currentLocation.country}&limit=1&appid=3980f86beb307e02c02a934d721a19a7`
+            .getLocationName(
+              `http://api.openweathermap.org/geo/1.0/reverse?lat=${this.weatherService.lat}&lon=${this.weatherService.lon}&limit=1&appid=3980f86beb307e02c02a934d721a19a7`
             )
             .pipe(
-              mergeMap((geoData) => {
-                this.weatherService.geoData = geoData;
-                this.currentLocationName = geoData[0].name;
+              mergeMap((weatherGeoData) => {
+                this.weatherService.currentWeatherGeo = weatherGeoData;
+                this.currentLocationName =
+                  this.weatherService.currentWeatherGeo[0].name;
+
                 return this.weatherService.getWeather(
-                  `https://api.openweathermap.org/data/2.5/onecall?lat=${this.weatherService.geoData[0].lat}&lon=${this.weatherService.geoData[0].lon}&units=metric&appid=3980f86beb307e02c02a934d721a19a7`
+                  `https://api.openweathermap.org/data/2.5/onecall?lat=${this.weatherService.lat}&lon=${this.weatherService.lon}&units=metric&appid=3980f86beb307e02c02a934d721a19a7`
                 );
               })
             );
         })
       )
-      .subscribe((weatherData) => {
-        this.weatherService.currentWeather = weatherData;
+      .subscribe((weather) => {
+        this.weatherService.currentWeather = weather;
         this.currentWeather = this.weatherService.currentWeather;
+
+        console.log(this.currentWeather.lat);
 
         for (let i = 0; i < this.dayWeather.length; i++) {
           this.dayWeather[i].date = new Date(
@@ -111,11 +136,11 @@ export class HomeComponent implements OnInit {
           ).toUTCString();
         }
 
-        console.log(this.dayWeather);
         this.isWeatherDataLoaded = Promise.resolve(true);
       });
+  }
 
-    this.weatherService.pollTimer.interval = setInterval(() => {
+  /*this.weatherService.pollTimer.interval = setInterval(() => {
       this.isWeatherDataLoaded = Promise.resolve(false);
       this.locService
         .getLocation('http://ip-api.com/json/')
@@ -127,7 +152,7 @@ export class HomeComponent implements OnInit {
                 `http://api.openweathermap.org/geo/1.0/direct?q=${this.locService.currentLocation.city},${this.locService.currentLocation.country}&limit=1&appid=3980f86beb307e02c02a934d721a19a7`
               )
               .pipe(
-                mergeMap((geoData) => {
+                mergeMap(geoData => {
                   this.weatherService.geoData = geoData;
                   return this.weatherService.getWeather(
                     `https://api.openweathermap.org/data/2.5/onecall?lat=${this.weatherService.geoData[0].lat}&lon=${this.weatherService.geoData[0].lon}&appid=3980f86beb307e02c02a934d721a19a7`
@@ -144,6 +169,5 @@ export class HomeComponent implements OnInit {
         });
 
       this.weatherService.pollTimer.pollCount++;
-    }, 600000);
-  }
+    }, 600000);*/
 }

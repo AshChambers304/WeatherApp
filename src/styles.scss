@@ -75,12 +75,10 @@ input {
 }
 
 .inline-scroller {
-  --_spacer: 1rem;
   display: grid;
   justify-content: center;
-  gap: var(--_spacer);
-  padding: var(--_spacer);
-  margin: 1rem 0;
+  gap: 5rem;
+  padding: 1rem;
   grid-auto-flow: column;
   grid-auto-columns: 100px;
 
@@ -96,12 +94,12 @@ input {
   .scroll-element {
     width: 100px;
     height: 100px;
-    gap: var(--_spacer);
     border-radius: 50%;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: var(--box-color);
   }
 
   .scroll-element.border {

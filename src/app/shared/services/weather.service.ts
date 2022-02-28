@@ -4,6 +4,7 @@ import { WeatherData } from '../models/weather-data';
 import { Observable } from 'rxjs';
 import { PollTimer } from '../models/poll-timer';
 import { GeoData } from '../models/geo-data';
+import { WeatherGeoData } from '../models/weather-geo-data';
 
 @Injectable({
   providedIn: 'root',
@@ -14,55 +15,18 @@ export class WeatherService {
   public lat: number = 0;
   public lon: number = 0;
 
-  public geoData: GeoData[] = [
-    {
-      name: '',
-      local_names: {
-        af: '',
-        ar: '',
-        ascii: '',
-        az: '',
-        bg: '',
-        ca: '',
-        da: '',
-        de: '',
-        el: '',
-        en: '',
-        eu: '',
-        fa: '',
-        feature_name: '',
-        fi: '',
-        fr: '',
-        gl: '',
-        he: '',
-        hi: '',
-        hr: '',
-        hu: '',
-        id: '',
-        it: '',
-        ja: '',
-        la: '',
-        lt: '',
-        mk: '',
-        nl: '',
-        no: '',
-        pl: '',
-        pt: '',
-        ro: '',
-        ru: '',
-        sk: '',
-        sl: '',
-        sr: '',
-        th: '',
-        tr: '',
-        vi: '',
-        zu: '',
-      },
-      lat: 0,
-      lon: 0,
-      country: '',
+  public currentLocation: GeoData = {
+    coords: {
+      accuracy: 0,
+      altitude: 0,
+      altitudeAccuracy: 0,
+      heading: 0,
+      latitude: 0,
+      longitude: 0,
+      speed: 0,
     },
-  ];
+    timestamp: 0,
+  };
 
   public currentWeather: WeatherData = {
     alerts: [],
@@ -92,10 +56,24 @@ export class WeatherService {
     timezone_offset: 0,
   };
 
+  public currentWeatherGeo!: WeatherGeoData[];
+
   constructor(private http: HttpClient) {}
 
-  getGeocoding(url: string) {
-    return this.http.get<GeoData[]>(url);
+  getLocation(): Observable<GeoData> {
+    return Observable.create((observer: any) => {
+      window.navigator.geolocation.getCurrentPosition(
+        (position: GeoData) => {
+          observer.next(position);
+          observer.complete();
+        },
+        (error) => observer.error(error)
+      );
+    });
+  }
+
+  getLocationName(url: string): Observable<WeatherGeoData[]> {
+    return this.http.get<WeatherGeoData[]>(url);
   }
 
   getWeather(url: string): Observable<WeatherData> {
