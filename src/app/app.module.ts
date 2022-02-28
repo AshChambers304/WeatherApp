@@ -10,7 +10,6 @@ import { NavigationComponent } from './shared/components/navigation/navigation.c
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HeaderComponent } from './shared/components/header/header.component';
 import { WeatherService } from './shared/services/weather.service';
-import { ThemeService } from './shared/services/theme.service';
 
 @NgModule({
   declarations: [

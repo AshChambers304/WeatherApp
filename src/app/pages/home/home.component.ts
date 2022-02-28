@@ -149,7 +149,7 @@ export class HomeComponent implements OnInit {
 
             return this.weatherService
               .getLocationName(
-                `http://api.openweathermap.org/geo/1.0/reverse?lat=${this.weatherService.lat}&lon=${this.weatherService.lon}&limit=1&appid=3980f86beb307e02c02a934d721a19a7`
+                `https://api.openweathermap.org/geo/1.0/reverse?lat=${this.weatherService.lat}&lon=${this.weatherService.lon}&limit=1&appid=3980f86beb307e02c02a934d721a19a7`
               )
               .pipe(
                 mergeMap((weatherGeoData) => {
