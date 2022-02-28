@@ -29,8 +29,6 @@ export class HomeComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute
   ) {
-    console.log();
-
     this.router.events.subscribe((val) => {
       this.day = this.route.snapshot.firstChild?.params['type'];
     });
@@ -127,8 +125,6 @@ export class HomeComponent implements OnInit {
       .subscribe((weather) => {
         this.weatherService.currentWeather = weather;
         this.currentWeather = this.weatherService.currentWeather;
-
-        console.log(this.currentWeather.lat);
 
         for (let i = 0; i < this.dayWeather.length; i++) {
           this.dayWeather[i].date = new Date(

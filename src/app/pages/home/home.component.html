@@ -1,4 +1,4 @@
-<div class="container" *ngIf="this.isWeatherDataLoaded | async">
+<div class="container">
   <h1 class="location">{{ this.currentLocationName }}</h1>
   <div class="inline-scroller snaps-inline">
     <div
@@ -15,7 +15,7 @@
       </div>
     </div>
   </div>
-  <main>
+  <main *ngIf="this.isWeatherDataLoaded | async">
     <div class="main-weather-info glass">
       <img
         src="../../../assets/weather-icons/{{
