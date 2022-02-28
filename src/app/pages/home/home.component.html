@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngIf="this.isWeatherDataLoaded | async">
   <h1 class="location">{{ this.currentLocationName }}</h1>
   <div class="inline-scroller snaps-inline">
     <div
@@ -7,7 +7,7 @@
       routerLinkActive="selected"
       *ngFor="let day of this.dayWeather; let i = index"
     >
-      <div class="scroll-element border" (click)="setSelectedDay(i)">
+      <div class="scroll-element box border" (click)="setSelectedDay(i)">
         <div class="date">
           <span class="bold">{{ dayWeather[i].date.slice(0, 3) }}</span>
           <span class="inline">{{ dayWeather[i].date.slice(5, 11) }}</span>
@@ -15,7 +15,7 @@
       </div>
     </div>
   </div>
-  <main *ngIf="this.isWeatherDataLoaded | async">
+  <main>
     <div class="main-weather-info glass">
       <img
         src="../../../assets/weather-icons/{{

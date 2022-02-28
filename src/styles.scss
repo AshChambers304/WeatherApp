@@ -77,8 +77,8 @@ input {
 .inline-scroller {
   display: grid;
   justify-content: center;
-  gap: 5rem;
-  padding: 1rem;
+  gap: 2rem;
+  padding: 2rem;
   grid-auto-flow: column;
   grid-auto-columns: 100px;
 
@@ -99,7 +99,6 @@ input {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: var(--box-color);
   }
 
   .scroll-element.border {

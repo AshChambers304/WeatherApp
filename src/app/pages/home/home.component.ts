@@ -107,7 +107,7 @@ export class HomeComponent implements OnInit {
 
           return this.weatherService
             .getLocationName(
-              `http://api.openweathermap.org/geo/1.0/reverse?lat=${this.weatherService.lat}&lon=${this.weatherService.lon}&limit=1&appid=3980f86beb307e02c02a934d721a19a7`
+              `https://api.openweathermap.org/geo/1.0/reverse?lat=${this.weatherService.lat}&lon=${this.weatherService.lon}&limit=1&appid=3980f86beb307e02c02a934d721a19a7`
             )
             .pipe(
               mergeMap((weatherGeoData) => {
@@ -134,36 +134,50 @@ export class HomeComponent implements OnInit {
 
         this.isWeatherDataLoaded = Promise.resolve(true);
       });
-  }
 
-  /*this.weatherService.pollTimer.interval = setInterval(() => {
+    this.weatherService.pollTimer.interval = setInterval(() => {
       this.isWeatherDataLoaded = Promise.resolve(false);
-      this.locService
-        .getLocation('http://ip-api.com/json/')
+      this.weatherService
+        .getLocation()
         .pipe(
-          mergeMap((locData) => {
-            this.locService.currentLocation = locData;
+          mergeMap((position) => {
+            this.weatherService.currentLocation = position;
+            this.weatherService.lat =
+              this.weatherService.currentLocation.coords.latitude;
+            this.weatherService.lon =
+              this.weatherService.currentLocation.coords.longitude;
+
             return this.weatherService
-              .getGeocoding(
-                `http://api.openweathermap.org/geo/1.0/direct?q=${this.locService.currentLocation.city},${this.locService.currentLocation.country}&limit=1&appid=3980f86beb307e02c02a934d721a19a7`
+              .getLocationName(
+                `http://api.openweathermap.org/geo/1.0/reverse?lat=${this.weatherService.lat}&lon=${this.weatherService.lon}&limit=1&appid=3980f86beb307e02c02a934d721a19a7`
               )
               .pipe(
-                mergeMap(geoData => {
-                  this.weatherService.geoData = geoData;
+                mergeMap((weatherGeoData) => {
+                  this.weatherService.currentWeatherGeo = weatherGeoData;
+                  this.currentLocationName =
+                    this.weatherService.currentWeatherGeo[0].name;
+
                   return this.weatherService.getWeather(
-                    `https://api.openweathermap.org/data/2.5/onecall?lat=${this.weatherService.geoData[0].lat}&lon=${this.weatherService.geoData[0].lon}&appid=3980f86beb307e02c02a934d721a19a7`
+                    `https://api.openweathermap.org/data/2.5/onecall?lat=${this.weatherService.lat}&lon=${this.weatherService.lon}&units=metric&appid=3980f86beb307e02c02a934d721a19a7`
                   );
                 })
               );
           })
         )
-        .subscribe((weatherData) => {
-          this.weatherService.currentWeather = weatherData;
+        .subscribe((weather) => {
+          this.weatherService.currentWeather = weather;
           this.currentWeather = this.weatherService.currentWeather;
+
+          for (let i = 0; i < this.dayWeather.length; i++) {
+            this.dayWeather[i].date = new Date(
+              this.currentWeather.daily[i].dt * 1000
+            ).toUTCString();
+          }
 
           this.isWeatherDataLoaded = Promise.resolve(true);
         });
 
       this.weatherService.pollTimer.pollCount++;
-    }, 600000);*/
+    }, 600000);
+  }
 }
