@@ -3,12 +3,17 @@
   <div class="inline-scroller snaps-inline">
     <div
       class="element-wrapper"
-      *ngFor="let day of this.dayWeather; let i = index"
+      *ngFor="let day of this.currentWeather.daily; let i = index"
+      [ngClass]="{ selected: this.selectedDay == i }"
     >
       <div class="scroll-element box border" (click)="setSelectedDay(i)">
         <div class="date">
-          <span class="bold">{{ dayWeather[i].date.slice(0, 3) }}</span>
-          <span class="inline">{{ dayWeather[i].date.slice(5, 11) }}</span>
+          <span class="bold">{{
+            this.convertDate(day.dt).toUTCString().slice(0, 3)
+          }}</span>
+          <span class="inline">{{
+            this.convertDate(day.dt).toUTCString().slice(5, 11)
+          }}</span>
         </div>
       </div>
     </div>

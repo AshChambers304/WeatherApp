@@ -38,52 +38,13 @@ export class HomeComponent implements OnInit {
 
   public pollTimer = this.weatherService.pollTimer;
 
-  public dayWeather: {
-    route: string;
-    date: string;
-  }[] = [
-    {
-      route: 'day1',
-
-      date: '',
-    },
-    {
-      route: 'day2',
-
-      date: '',
-    },
-    {
-      route: 'day3',
-
-      date: '',
-    },
-    {
-      route: 'day4',
-
-      date: '',
-    },
-    {
-      route: 'day5',
-
-      date: '',
-    },
-    {
-      route: 'day6',
-
-      date: '',
-    },
-    {
-      route: 'day7',
-
-      date: '',
-    },
-  ];
-
   public day!: string;
 
   public selectedDay!: number;
 
   public currentLocationName!: string;
+
+  public dayActive: boolean = false;
 
   ngOnInit(): void {
     this.setSelectedDay(0);
@@ -91,7 +52,7 @@ export class HomeComponent implements OnInit {
     this.getCurrentLocationWeather();
   }
 
-  setSelectedDay(dayID: number) {
+  setSelectedDay(dayID: number): void {
     this.selectedDay = dayID;
   }
 
@@ -107,5 +68,9 @@ export class HomeComponent implements OnInit {
         this.currentLocationName = this.weatherService.currentLocationName;
       }
     });
+  }
+
+  convertDate(date: number): Date {
+    return new Date(date * 1000);
   }
 }
