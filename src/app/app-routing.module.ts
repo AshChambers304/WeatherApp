@@ -8,10 +8,9 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
-    children: [{ path: ':type', component: HomeComponent }],
   },
   { path: 'search', component: SearchComponent },
-  { path: '', redirectTo: '/home/day2', pathMatch: 'full' },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent },
 ];
 

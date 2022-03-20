@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { WeatherData } from '../models/weather-data';
-import { Observable } from 'rxjs';
+import { mergeMap, Observable, Subject } from 'rxjs';
 import { PollTimer } from '../models/poll-timer';
 import { GeoData } from '../models/geo-data';
 import { WeatherGeoData } from '../models/weather-geo-data';
@@ -12,49 +12,16 @@ import { WeatherGeoData } from '../models/weather-geo-data';
 export class WeatherService {
   public pollTimer: PollTimer = { pollCount: 0, interval: null };
 
-  public lat: number = 0;
-  public lon: number = 0;
+  public lat!: number;
+  public lon!: number;
 
-  public currentLocation: GeoData = {
-    coords: {
-      accuracy: 0,
-      altitude: 0,
-      altitudeAccuracy: 0,
-      heading: 0,
-      latitude: 0,
-      longitude: 0,
-      speed: 0,
-    },
-    timestamp: 0,
-  };
+  public isWeatherDataLoaded$: Subject<boolean> = new Subject<boolean>();
 
-  public currentWeather: WeatherData = {
-    alerts: [],
-    current: {
-      clouds: 0,
-      dew_point: 0,
-      dt: 0,
-      feels_like: 0,
-      humidity: 0,
-      pressure: 0,
-      sunrise: 0,
-      sunset: 0,
-      temp: 0,
-      uvi: 0,
-      visibility: 0,
-      weather: [],
-      wind_deg: 0,
-      wind_gust: 0,
-      wind_speed: 0,
-    },
-    daily: [],
-    hourly: [],
-    lat: 0,
-    lon: 0,
-    minutely: [],
-    timezone: '',
-    timezone_offset: 0,
-  };
+  public currentLocationName!: string;
+
+  public currentLocation!: GeoData;
+
+  public currentWeather!: WeatherData;
 
   public currentWeatherGeo!: WeatherGeoData[];
 
@@ -78,5 +45,35 @@ export class WeatherService {
 
   getWeather(url: string): Observable<WeatherData> {
     return this.http.get<WeatherData>(url);
+  }
+
+  getCurrentLocationWeather(): void {
+    this.isWeatherDataLoaded$.next(false);
+    this.getLocation()
+      .pipe(
+        mergeMap((position) => {
+          this.currentLocation = position;
+          this.lat = this.currentLocation.coords.latitude;
+          this.lon = this.currentLocation.coords.longitude;
+
+          return this.getLocationName(
+            `https://api.openweathermap.org/geo/1.0/reverse?lat=${this.lat}&lon=${this.lon}&limit=1&appid=3980f86beb307e02c02a934d721a19a7`
+          ).pipe(
+            mergeMap((weatherGeoData) => {
+              this.currentWeatherGeo = weatherGeoData;
+              this.currentLocationName = this.currentWeatherGeo[0].name;
+
+              return this.getWeather(
+                `https://api.openweathermap.org/data/2.5/onecall?lat=${this.lat}&lon=${this.lon}&units=metric&appid=3980f86beb307e02c02a934d721a19a7`
+              );
+            })
+          );
+        })
+      )
+      .subscribe((weather) => {
+        this.currentWeather = weather;
+
+        this.isWeatherDataLoaded$.next(true);
+      });
   }
 }
