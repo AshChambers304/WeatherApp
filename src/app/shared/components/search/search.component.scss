@@ -1,0 +1,18 @@
+#search-form {
+  padding: 0.5rem;
+  border-radius: 9px;
+  border: 2px solid var(--text-color);
+  display: flex;
+  align-items: center;
+
+  fa-icon {
+    margin-right: 1rem;
+  }
+
+  input {
+    width: 100%;
+    background-color: transparent;
+    outline: none;
+    border: none;
+  }
+}

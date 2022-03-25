@@ -1,7 +1,4 @@
-import { Component, OnInit, Renderer2 } from '@angular/core';
-import { WeatherService } from 'src/app/shared/services/weather.service';
-import { WeatherData } from 'src/app/shared/models/weather-data';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
 import {
   faWater,
   faWind,
@@ -9,6 +6,8 @@ import {
   faSun,
   faCloudDownloadAlt,
 } from '@fortawesome/free-solid-svg-icons';
+import { WeatherData } from 'src/app/shared/models/weather-data';
+import { WeatherService } from 'src/app/shared/services/weather.service';
 
 @Component({
   templateUrl: './home.component.html',
@@ -21,16 +20,9 @@ export class HomeComponent implements OnInit {
   faCloudDownloadAlt = faCloudDownloadAlt;
   faHandHoldingWater = faHandHoldingWater;
 
-  constructor(
-    public weatherService: WeatherService,
-    private renderer: Renderer2,
-    private router: Router,
-    private route: ActivatedRoute
-  ) {
-    this.router.events.subscribe((val) => {
-      this.day = this.route.snapshot.firstChild?.params['type'];
-    });
-  }
+  constructor(private weatherService: WeatherService) {}
+
+  public selectedDay!: number;
 
   public currentWeather!: WeatherData;
 
@@ -38,26 +30,10 @@ export class HomeComponent implements OnInit {
 
   public pollTimer = this.weatherService.pollTimer;
 
-  public day!: string;
-
-  public selectedDay!: number;
-
   public currentLocationName!: string;
 
-  public dayActive: boolean = false;
-
-  ngOnInit(): void {
-    this.setSelectedDay(0);
-
-    this.getCurrentLocationWeather();
-  }
-
-  setSelectedDay(dayID: number): void {
-    this.selectedDay = dayID;
-  }
-
   getCurrentLocationWeather(): void {
-    this.weatherService.getCurrentLocationWeather();
+    this.weatherService.fetchCurrentLocationWeather();
 
     this.weatherService.isWeatherDataLoaded$.subscribe((result) => {
       this.isWeatherDataLoaded = result;
@@ -68,6 +44,19 @@ export class HomeComponent implements OnInit {
         this.currentLocationName = this.weatherService.currentLocationName;
       }
     });
+  }
+
+  ngOnInit(): void {
+    this.setSelectedDay(0);
+    this.getCurrentLocationWeather();
+  }
+
+  ngOnDestroy(): void {
+    this.weatherService.isWeatherDataLoaded$.unsubscribe();
+  }
+
+  setSelectedDay(dayID: number): void {
+    this.selectedDay = dayID;
   }
 
   convertDate(date: number): Date {

@@ -7,4 +7,6 @@ import { Component, Inject } from '@angular/core';
 })
 export class AppComponent {
   title = 'WeatherApp';
+
+  constructor() {}
 }
