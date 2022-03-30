@@ -85,7 +85,7 @@ export class WeatherService {
     this.isQueryDataLoaded$.next(false);
 
     this.queryLocation(
-      `http://api.openweathermap.org/geo/1.0/direct?q=${searchedLocation}&limit=10&appid=3980f86beb307e02c02a934d721a19a7`
+      `https://api.openweathermap.org/geo/1.0/direct?q=${searchedLocation}&limit=10&appid=3980f86beb307e02c02a934d721a19a7`
     ).subscribe((searchedGeoData) => {
       this.searchedLocation = searchedGeoData;
 
