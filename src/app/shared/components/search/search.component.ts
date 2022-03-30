@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { WeatherService } from '../../services/weather.service';
+import { FormControl } from '@angular/forms';
+import { WeatherGeoData } from '../../models/weather-geo-data';
+import { faThinkPeaks } from '@fortawesome/free-brands-svg-icons';
 
 @Component({
   selector: 'app-search',
@@ -10,33 +13,81 @@ import { WeatherService } from '../../services/weather.service';
 export class SearchComponent implements OnInit {
   faSearch = faSearch;
 
+  locationQueryControl = new FormControl('');
+
   public _searchQuery: string = '';
+
+  public isQueryDataLoaded: boolean = false;
 
   public isWeatherDataLoaded: boolean = false;
 
+  public isSearchActive: boolean = false;
+
+  public queryTimeout!: NodeJS.Timeout;
+
+  public querySelectionIndex!: number;
+
+  public queryLocationData!: WeatherGeoData[];
+
+  public isDropDownOpen: boolean = false;
+
   constructor(private weatherService: WeatherService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.locationQueryControl.valueChanges.subscribe((query) => {
+      this.isQueryDataLoaded = false;
+      this.isSearchActive = true;
+      this.queryLocationData = [];
+      this.stopQueryTimer(this.queryTimeout);
+      this.startQueryTimer(query);
+    });
+  }
 
-  getSearchedLocationWeather(searchedLocation: string): void {
-    this.weatherService.fetchSearchedLocationWeather(searchedLocation);
+  startQueryTimer(queryLocation: string): void {
+    if (queryLocation != '') {
+      this.hideDropdown();
+      this.queryTimeout = setTimeout(() => {
+        this.getSearchedLocation(queryLocation);
+      }, 5000);
+    } else {
+      this.isSearchActive = false;
+      this.hideDropdown();
+    }
+  }
 
-    this.weatherService.isWeatherDataLoaded$.subscribe((result) => {
-      this.isWeatherDataLoaded = result;
+  stopQueryTimer(timerID: NodeJS.Timeout): void {
+    clearTimeout(timerID);
+  }
 
-      if (this.isWeatherDataLoaded) {
+  getSearchedLocation(searchedLocation: string): void {
+    this.weatherService.fetchSearchedLocation(searchedLocation);
+
+    this.weatherService.isQueryDataLoaded$.subscribe((result) => {
+      this.isQueryDataLoaded = result;
+
+      if (this.isQueryDataLoaded) {
         console.log(this.weatherService.searchedLocation);
+
+        this.queryLocationData = this.weatherService.searchedLocation;
+        this.showDropdown();
       }
     });
   }
 
-  get searchQuery() {
-    return this._searchQuery;
+  setQuerySelectionIndex(newIndex: number): void {
+    this.querySelectionIndex = newIndex;
+    this.getSearchedLocationWeather();
   }
 
-  set searchQuery(newQuery: string) {
-    this._searchQuery = newQuery;
+  getSearchedLocationWeather(): void {
+    this.weatherService.fetchSearchedLocationWeather(this.querySelectionIndex);
+  }
 
-    console.log(this.searchQuery);
+  showDropdown(): void {
+    this.isDropDownOpen = true;
+  }
+
+  hideDropdown(): void {
+    this.isDropDownOpen = false;
   }
 }

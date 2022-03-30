@@ -4,6 +4,7 @@
   border: 2px solid var(--text-color);
   display: flex;
   align-items: center;
+  position: relative;
 
   fa-icon {
     margin-right: 1rem;
@@ -15,4 +16,34 @@
     outline: none;
     border: none;
   }
+}
+
+.dropdown {
+  opacity: 0;
+  position: absolute;
+  left: 25%;
+  min-width: 50%;
+  min-height: max-content;
+  padding: 1rem;
+  border-radius: 9px;
+  text-decoration: none;
+  list-style: none;
+  z-index: 3;
+  pointer-events: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.dropdown.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.location-info {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 1rem;
+}
+
+.loader-container {
+  padding-left: 1rem;
 }

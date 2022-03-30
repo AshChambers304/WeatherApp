@@ -17,6 +17,8 @@ export class WeatherService {
 
   public isWeatherDataLoaded$: Subject<boolean> = new Subject<boolean>();
 
+  public isQueryDataLoaded$: Subject<boolean> = new Subject<boolean>();
+
   public currentLocationName!: string;
 
   public currentLocation!: GeoData;
@@ -79,29 +81,31 @@ export class WeatherService {
       });
   }
 
-  fetchSearchedLocationWeather(searchedLocation: string): void {
-    this.isWeatherDataLoaded$.next(false);
+  fetchSearchedLocation(searchedLocation: string): void {
+    this.isQueryDataLoaded$.next(false);
 
     this.queryLocation(
-      `http://api.openweathermap.org/geo/1.0/direct?q=${searchedLocation}&limit=5&appid=3980f86beb307e02c02a934d721a19a7`
-    )
-      .pipe(
-        mergeMap((searchedGeoData) => {
-          this.searchedLocation = searchedGeoData;
+      `http://api.openweathermap.org/geo/1.0/direct?q=${searchedLocation}&limit=10&appid=3980f86beb307e02c02a934d721a19a7`
+    ).subscribe((searchedGeoData) => {
+      this.searchedLocation = searchedGeoData;
 
-          this.lat = this.searchedLocation[0].lat;
-          this.lon = this.searchedLocation[0].lat;
-          this.currentLocationName = this.searchedLocation[0].name;
+      this.isQueryDataLoaded$.next(true);
+    });
+  }
 
-          return this.getWeather(
-            `https://api.openweathermap.org/data/2.5/onecall?lat=${this.lat}&lon=${this.lon}&units=metric&appid=3980f86beb307e02c02a934d721a19a7`
-          );
-        })
-      )
-      .subscribe((weather) => {
-        this.currentWeather = weather;
+  fetchSearchedLocationWeather(locationIndex: number): void {
+    this.isWeatherDataLoaded$.next(false);
 
-        this.isWeatherDataLoaded$.next(true);
-      });
+    this.lat = this.searchedLocation[locationIndex].lat;
+    this.lon = this.searchedLocation[locationIndex].lon;
+    this.currentLocationName = this.searchedLocation[locationIndex].name;
+
+    this.getWeather(
+      `https://api.openweathermap.org/data/2.5/onecall?lat=${this.lat}&lon=${this.lon}&units=metric&appid=3980f86beb307e02c02a934d721a19a7`
+    ).subscribe((weather) => {
+      this.currentWeather = weather;
+
+      this.isWeatherDataLoaded$.next(true);
+    });
   }
 }

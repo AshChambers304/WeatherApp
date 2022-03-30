@@ -10,7 +10,7 @@ import { NavigationComponent } from './shared/components/navigation/navigation.c
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HeaderComponent } from './shared/components/header/header.component';
 import { WeatherService } from './shared/services/weather.service';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -27,6 +27,7 @@ import { FormsModule } from '@angular/forms';
     AppRoutingModule,
     FontAwesomeModule,
     FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [WeatherService],
   bootstrap: [AppComponent],

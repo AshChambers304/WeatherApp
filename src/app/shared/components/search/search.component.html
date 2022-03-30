@@ -2,11 +2,31 @@
   <form id="search-form">
     <fa-icon [icon]="faSearch"></fa-icon>
     <input
-      [(ngModel)]="searchQuery"
       type="search"
-      id="weather-query"
-      name="weather-query"
-      placeholder="Search Locations..."
+      id="location-query"
+      name="locationQuery"
+      placeholder="Search City..."
+      [formControl]="locationQueryControl"
     />
+    <div class="loader-container">
+      <div
+        class="loader"
+        [ngClass]="
+          this.isSearchActive && !this.isQueryDataLoaded ? 'visible' : ''
+        "
+      ></div>
+    </div>
   </form>
+
+  <ul class="dropdown box" [ngClass]="this.isDropDownOpen ? 'visible' : ''">
+    <li *ngFor="let city of queryLocationData; let i = index">
+      <div class="location-info" (click)="this.setQuerySelectionIndex(i)">
+        {{ this.queryLocationData[i].name }}
+        <div>
+          {{ this.queryLocationData[i].state }},
+          {{ this.queryLocationData[i].country }}
+        </div>
+      </div>
+    </li>
+  </ul>
 </div>
