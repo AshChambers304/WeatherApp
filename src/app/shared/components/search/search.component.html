@@ -7,6 +7,7 @@
       name="locationQuery"
       placeholder="Search City..."
       [formControl]="locationQueryControl"
+      (focus)="this.showDropdown()"
     />
     <div class="loader-container">
       <div

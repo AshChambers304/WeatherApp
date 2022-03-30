@@ -41,7 +41,13 @@
 .location-info {
   display: flex;
   justify-content: space-between;
-  padding-bottom: 1rem;
+  align-items: center;
+  padding: 1rem;
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--bg-color);
+  }
 }
 
 .loader-container {

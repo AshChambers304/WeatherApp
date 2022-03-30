@@ -3,7 +3,6 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { WeatherService } from '../../services/weather.service';
 import { FormControl } from '@angular/forms';
 import { WeatherGeoData } from '../../models/weather-geo-data';
-import { faThinkPeaks } from '@fortawesome/free-brands-svg-icons';
 
 @Component({
   selector: 'app-search',
@@ -44,11 +43,12 @@ export class SearchComponent implements OnInit {
   }
 
   startQueryTimer(queryLocation: string): void {
+    this._searchQuery = queryLocation;
     if (queryLocation != '') {
       this.hideDropdown();
       this.queryTimeout = setTimeout(() => {
         this.getSearchedLocation(queryLocation);
-      }, 5000);
+      }, 2000);
     } else {
       this.isSearchActive = false;
       this.hideDropdown();
@@ -77,6 +77,7 @@ export class SearchComponent implements OnInit {
   setQuerySelectionIndex(newIndex: number): void {
     this.querySelectionIndex = newIndex;
     this.getSearchedLocationWeather();
+    this.hideDropdown();
   }
 
   getSearchedLocationWeather(): void {
@@ -84,7 +85,9 @@ export class SearchComponent implements OnInit {
   }
 
   showDropdown(): void {
-    this.isDropDownOpen = true;
+    if (this._searchQuery != '') {
+      this.isDropDownOpen = true;
+    }
   }
 
   hideDropdown(): void {
