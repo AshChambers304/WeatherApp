@@ -65,7 +65,7 @@ export class WeatherService {
           ).pipe(
             mergeMap((weatherGeoData) => {
               this.currentWeatherGeo = weatherGeoData;
-              this.currentLocationName = this.currentWeatherGeo[0].name;
+              this.currentLocationName = `${this.currentWeatherGeo[0].name}, ${this.currentWeatherGeo[0].state}`;
 
               return this.getWeather(
                 `https://api.openweathermap.org/data/2.5/onecall?lat=${this.lat}&lon=${this.lon}&units=metric&appid=3980f86beb307e02c02a934d721a19a7`
@@ -98,7 +98,7 @@ export class WeatherService {
 
     this.lat = this.searchedLocation[locationIndex].lat;
     this.lon = this.searchedLocation[locationIndex].lon;
-    this.currentLocationName = this.searchedLocation[locationIndex].name;
+    this.currentLocationName = `${this.searchedLocation[locationIndex].name}, ${this.searchedLocation[locationIndex].state}`;
 
     this.getWeather(
       `https://api.openweathermap.org/data/2.5/onecall?lat=${this.lat}&lon=${this.lon}&units=metric&appid=3980f86beb307e02c02a934d721a19a7`

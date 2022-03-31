@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faSearch, faWindowClose } from '@fortawesome/free-solid-svg-icons';
 import { WeatherService } from '../../services/weather.service';
 import { FormControl } from '@angular/forms';
 import { WeatherGeoData } from '../../models/weather-geo-data';
@@ -11,6 +11,7 @@ import { WeatherGeoData } from '../../models/weather-geo-data';
 })
 export class SearchComponent implements OnInit {
   faSearch = faSearch;
+  faWindowClose = faWindowClose;
 
   locationQueryControl = new FormControl('');
 
@@ -23,8 +24,6 @@ export class SearchComponent implements OnInit {
   public isSearchActive: boolean = false;
 
   public queryTimeout!: NodeJS.Timeout;
-
-  public querySelectionIndex!: number;
 
   public queryLocationData!: WeatherGeoData[];
 
@@ -45,7 +44,6 @@ export class SearchComponent implements OnInit {
   startQueryTimer(queryLocation: string): void {
     this._searchQuery = queryLocation;
     if (queryLocation != '') {
-      this.hideDropdown();
       this.queryTimeout = setTimeout(() => {
         this.getSearchedLocation(queryLocation);
       }, 2000);
@@ -75,22 +73,25 @@ export class SearchComponent implements OnInit {
   }
 
   setQuerySelectionIndex(newIndex: number): void {
-    this.querySelectionIndex = newIndex;
-    this.getSearchedLocationWeather();
+    this.getSearchedLocationWeather(newIndex);
     this.hideDropdown();
   }
 
-  getSearchedLocationWeather(): void {
-    this.weatherService.fetchSearchedLocationWeather(this.querySelectionIndex);
+  getSearchedLocationWeather(newIndex: number): void {
+    this.weatherService.fetchSearchedLocationWeather(newIndex);
   }
 
   showDropdown(): void {
     if (this._searchQuery != '') {
-      this.isDropDownOpen = true;
+      setTimeout(() => {
+        this.isDropDownOpen = true;
+      }, 100);
     }
   }
 
   hideDropdown(): void {
-    this.isDropDownOpen = false;
+    setTimeout(() => {
+      this.isDropDownOpen = false;
+    }, 100);
   }
 }

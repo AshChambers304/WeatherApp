@@ -8,6 +8,7 @@
       placeholder="Search City..."
       [formControl]="locationQueryControl"
       (focus)="this.showDropdown()"
+      (blur)="this.hideDropdown()"
     />
     <div class="loader-container">
       <div
@@ -20,6 +21,10 @@
   </form>
 
   <ul class="dropdown box" [ngClass]="this.isDropDownOpen ? 'visible' : ''">
+    <div class="no-results" *ngIf="this.queryLocationData.length == 0">
+      <fa-icon [icon]="faWindowClose"></fa-icon>
+      <h1>No results</h1>
+    </div>
     <li *ngFor="let city of queryLocationData; let i = index">
       <div class="location-info" (click)="this.setQuerySelectionIndex(i)">
         {{ this.queryLocationData[i].name }}

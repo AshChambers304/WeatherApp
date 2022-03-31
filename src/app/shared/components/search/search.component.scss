@@ -24,7 +24,6 @@
   left: 25%;
   min-width: 50%;
   min-height: max-content;
-  padding: 1rem;
   border-radius: 9px;
   text-decoration: none;
   list-style: none;
@@ -52,4 +51,17 @@
 
 .loader-container {
   padding-left: 1rem;
+}
+
+.no-results {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 5rem;
+
+  fa-icon {
+    font-size: var(--fs-xlarge);
+    color: var(--error-color);
+  }
 }
