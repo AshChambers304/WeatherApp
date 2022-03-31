@@ -19,6 +19,7 @@
 }
 
 .dropdown {
+  display: none;
   opacity: 0;
   position: absolute;
   left: 25%;
@@ -33,8 +34,21 @@
 }
 
 .dropdown.visible {
+  display: block;
   opacity: 1;
   pointer-events: auto;
+}
+
+.current-loc-btn-container {
+  display: none;
+  opacity: 0;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.current-loc-btn-container.visible {
+  display: block;
+  opacity: 1;
 }
 
 .location-info {

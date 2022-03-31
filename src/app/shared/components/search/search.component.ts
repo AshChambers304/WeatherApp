@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { faSearch, faWindowClose } from '@fortawesome/free-solid-svg-icons';
+import {
+  faSearch,
+  faWindowClose,
+  faCrosshairs,
+} from '@fortawesome/free-solid-svg-icons';
 import { WeatherService } from '../../services/weather.service';
 import { FormControl } from '@angular/forms';
 import { WeatherGeoData } from '../../models/weather-geo-data';
@@ -12,6 +16,7 @@ import { WeatherGeoData } from '../../models/weather-geo-data';
 export class SearchComponent implements OnInit {
   faSearch = faSearch;
   faWindowClose = faWindowClose;
+  faLocationArrow = faCrosshairs;
 
   locationQueryControl = new FormControl('');
 
@@ -25,7 +30,7 @@ export class SearchComponent implements OnInit {
 
   public queryTimeout!: NodeJS.Timeout;
 
-  public queryLocationData!: WeatherGeoData[];
+  public queryLocationData: WeatherGeoData[] = [];
 
   public isDropDownOpen: boolean = false;
 
@@ -72,8 +77,13 @@ export class SearchComponent implements OnInit {
     });
   }
 
+  getCurrentLocationWeather(): void {
+    this.weatherService.fetchCurrentLocationWeather();
+  }
+
   setQuerySelectionIndex(newIndex: number): void {
     this.getSearchedLocationWeather(newIndex);
+    this.isSearchActive = false;
     this.hideDropdown();
   }
 

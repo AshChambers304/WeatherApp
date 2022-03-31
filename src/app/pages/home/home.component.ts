@@ -22,7 +22,7 @@ export class HomeComponent implements OnInit {
 
   constructor(private weatherService: WeatherService) {}
 
-  public selectedDay!: number;
+  public selectedDay: number = 0;
 
   public currentWeather!: WeatherData;
 
@@ -30,7 +30,7 @@ export class HomeComponent implements OnInit {
 
   public pollTimer = this.weatherService.pollTimer;
 
-  public currentLocationName!: string;
+  public currentLocationName: string = '';
 
   getCurrentLocationWeather(): void {
     this.weatherService.fetchCurrentLocationWeather();
@@ -49,10 +49,6 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.setSelectedDay(0);
     this.getCurrentLocationWeather();
-  }
-
-  ngOnDestroy(): void {
-    this.weatherService.isWeatherDataLoaded$.unsubscribe();
   }
 
   setSelectedDay(dayID: number): void {

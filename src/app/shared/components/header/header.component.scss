@@ -13,22 +13,6 @@ header {
   }
 
   .search-bar {
-    margin: 0 1rem;
-  }
-
-  .title {
-    font-family: var(--ff-alt);
-    font-size: var(--fs-xlarge);
-    font-weight: var(--fw-bold);
-
-    display: none;
-  }
-}
-
-@media screen and (min-width: 400px) {
-  header {
-    .title {
-      display: flex;
-    }
+    margin: 0 auto;
   }
 }

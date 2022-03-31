@@ -18,10 +18,17 @@
         "
       ></div>
     </div>
+
+    <fa-icon
+      class="current-loc-btn-container"
+      [icon]="faLocationArrow"
+      [ngClass]="this.isSearchActive ? '' : 'visible'"
+      (click)="this.getCurrentLocationWeather()"
+    ></fa-icon>
   </form>
 
   <ul class="dropdown box" [ngClass]="this.isDropDownOpen ? 'visible' : ''">
-    <div class="no-results" *ngIf="this.queryLocationData.length == 0">
+    <div class="no-results" *ngIf="this.queryLocationData?.length == 0">
       <fa-icon [icon]="faWindowClose"></fa-icon>
       <h1>No results</h1>
     </div>
