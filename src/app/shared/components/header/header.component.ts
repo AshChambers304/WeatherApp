@@ -31,7 +31,7 @@ export class HeaderComponent implements OnInit {
 
   getCurrentDate(): void {
     setInterval(() => {
-      this.currentTime = new Date().toUTCString().slice(0, 22).toString();
+      this.currentTime = new Date().toLocaleString().slice(0, 17).toString();
     }, 500);
   }
 }
